@@ -137,10 +137,10 @@
       <!--begin::Copyright-->
       <strong>
         Copyright &copy; 2025&nbsp;
-        <a href="https://www.youtube.com/watch?v=WCRTdpTfoB0"
+        <a href="https://grupoasiu.com/"
           class="text-decoration-none"
           target="_blank"
-          rel="noopener noreferrer">Arturi Izquierdo</a>.
+          rel="noopener noreferrer">Grupo ASIU</a>.
       </strong>
       Todos los derechos reservados.
       <!--end::Copyright-->

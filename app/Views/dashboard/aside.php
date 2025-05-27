@@ -8,7 +8,7 @@
             <img
                 src="<?= base_url('public/dist/assets/img/logogasiub.png') ?>"
                 class="brand-image"
-                width="150"
+                width="120"
                 height="auto" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
