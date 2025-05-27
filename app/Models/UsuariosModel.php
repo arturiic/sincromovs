@@ -12,6 +12,7 @@ class UsuariosModel extends Model
     {
     return $this->select('idusuarios, usuario')
                 ->where('estado', 'ACTIVO')
+                ->whereIn('perfil', ['FINANZAS', 'TESORERIA', 'SISTEMAS'])
                 ->orderBy('idusuarios','ASC') 
                 ->findAll();
     }
