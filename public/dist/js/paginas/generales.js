@@ -258,7 +258,7 @@ function cambioUsuario() {
     allowOutsideClick: false
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location.href = window.origin + '/sincromovs/login/salir';
+      window.location.href = URL_PY + 'login/salir';
     }
   });
 }
