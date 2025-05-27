@@ -70,7 +70,6 @@ function cargaDestinatarios()
 
 function registrar() {
     var parametros = 'nombre=' + $('#txtnombre').val() +
-            '&fecha_creacion=' + $('#datefecha').val() +
             '&estado=' + $('#cmbestado').val();
     $.ajax({
         type: "POST",
