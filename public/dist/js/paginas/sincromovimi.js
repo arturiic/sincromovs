@@ -83,11 +83,11 @@ function insertarMovimientos() {
         success: function (response) {
             let htmlContent = `<div style="text-align: left;">`;
 
-            // Mostrar mensaje general - CORRECCIÓN AQUÍ
+            // Mensaje general
             const todosExitosos = response.details.omitidos.length === 0 && response.details.errores.length === 0;
             const algunosExitosos = response.details.registrados.length > 0;
 
-            htmlContent += `<p><strong>${todosExitosos ? 'Todos los movimientos fueron registrados correctamente' :
+            htmlContent += `<p><strong>${todosExitosos ? 'Todos los movimientos fueron registrados' :
                 algunosExitosos ? 'Algunos movimientos fueron registrados' :
                     'Ningún movimiento fue registrado'}</strong></p>`;
 
@@ -107,7 +107,11 @@ function insertarMovimientos() {
 
             // Mostrar detalles si hay omitidos o errores
             if (totalOmitidos > 0 || totalErrores > 0) {
-                htmlContent += `<hr><h5>Detalles:</h5>`;
+                htmlContent += `<hr><button id="btnDetalles" class="btn btn-link p-0" style="text-decoration: none;">
+                <h5 style="cursor: pointer; color: #007bff;">▼ Detalles</h5>
+            </button>`;
+
+                htmlContent += `<div id="detallesContenido" style="display: none;">`;
 
                 if (totalOmitidos > 0) {
                     htmlContent += `<p><strong>Movimientos omitidos (duplicados):</strong></p><ul>`;
@@ -124,11 +128,13 @@ function insertarMovimientos() {
                     });
                     htmlContent += `</ul>`;
                 }
+
+                htmlContent += `</div>`;
             }
 
             htmlContent += `</div>`;
 
-            // Determinar el icono según el resultado - CORRECCIÓN AQUÍ
+            // Determinar el icono según el resultado
             let icon, title;
             if (todosExitosos) {
                 icon = 'success';
@@ -146,7 +152,28 @@ function insertarMovimientos() {
                 title: title,
                 html: htmlContent,
                 confirmButtonText: 'Aceptar',
-                width: '800px'
+                width: '800px',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false,
+                didOpen: () => {
+                    // Agregar evento click al botón de detalles
+                    const btnDetalles = document.getElementById('btnDetalles');
+                    if (btnDetalles) {
+                        btnDetalles.addEventListener('click', () => {
+                            const detalles = document.getElementById('detallesContenido');
+                            const h5 = btnDetalles.querySelector('h5');
+                            if (detalles.style.display === 'none') {
+                                detalles.style.display = 'block';
+                                h5.innerHTML = '▲ Detalles';
+                            } else {
+                                detalles.style.display = 'none';
+                                h5.innerHTML = '▼ Detalles';
+                            }
+                        });
+                    }
+                }
             }).then(() => {
                 // Limpiar tabla solo si hubo algún registro exitoso
                 if (todosExitosos) {

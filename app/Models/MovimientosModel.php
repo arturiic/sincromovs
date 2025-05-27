@@ -22,38 +22,38 @@ class MovimientosModel extends Model
     ];
 
     public function registrarSincroMov($idempresa, $titulo, $enviado_a, $fecha_hora, $monto, $moneda, $noperacion)
-{
-    $sql = "CALL REGISTRAR_SINCROMOV(?, ?, ?, ?, ?, ?, ?)";
-    $query = $this->db->query($sql, [
-        $idempresa,
-        $titulo,
-        $enviado_a,
-        $fecha_hora,
-        $monto,
-        $moneda,
-        $noperacion
-    ]);
-    
-    // Obtener el resultado completo (resultado y mensaje)
-    $result = $query->getRow();
-    
-    // Liberar el resultset
-    $query->freeResult();
-    
-    if ($result) {
+    {
+        $sql = "CALL REGISTRAR_SINCROMOV(?, ?, ?, ?, ?, ?, ?)";
+        $query = $this->db->query($sql, [
+            $idempresa,
+            $titulo,
+            $enviado_a,
+            $fecha_hora,
+            $monto,
+            $moneda,
+            $noperacion
+        ]);
+
+        // Obtener el resultado completo (resultado y mensaje)
+        $result = $query->getRow();
+
+        // Liberar el resultset
+        $query->freeResult();
+
+        if ($result) {
+            return [
+                'resultado' => $result->resultado ?? 'ERROR',
+                'mensaje' => $result->mensaje ?? 'Error desconocido',
+                'noperacion' => $noperacion
+            ];
+        }
+
         return [
-            'resultado' => $result->resultado ?? 'ERROR',
-            'mensaje' => $result->mensaje ?? 'Error desconocido',
+            'resultado' => 'ERROR',
+            'mensaje' => 'No se recibió respuesta del procedimiento almacenado',
             'noperacion' => $noperacion
         ];
     }
-    
-    return [
-        'resultado' => 'ERROR',
-        'mensaje' => 'No se recibió respuesta del procedimiento almacenado',
-        'noperacion' => $noperacion
-    ];
-}
     //PARA REGISTRAR MOVS CON SP
     public function registrarMovimientos($xmlContent)
     {
@@ -154,8 +154,8 @@ class MovimientosModel extends Model
         }
     }
     public function movimientosXcod($cod)
-{
-    return $this->select('mov_finanzas.idmov_finanzas,
+    {
+        return $this->select('mov_finanzas.idmov_finanzas,
                         mov_finanzas.iddestinatario,
                         mov_finanzas.iddet_entidad_empresa,
                         mov_finanzas.nombre_depositante,
@@ -165,8 +165,32 @@ class MovimientosModel extends Model
                         mov_finanzas.tipo,
                         mov_finanzas.noperacion,
                         IFNULL(NULLIF(dest.nombre, ""), mov_finanzas.enviado_a) as enviado_a')
-        ->join('destinatario dest', 'mov_finanzas.iddestinatario = dest.iddestinatario', 'left')
-        ->where('mov_finanzas.idmov_finanzas', $cod)
-        ->first();
-}
+            ->join('destinatario dest', 'mov_finanzas.iddestinatario = dest.iddestinatario', 'left')
+            ->where('mov_finanzas.idmov_finanzas', $cod)
+            ->first();
+    }
+    public function obtenerTotalesPorMes($idEmpresa)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->select("MONTH(fecha) as mes, SUM(monto) as total");
+        $builder->where("tipo", "SALIDA");
+        $builder->where("YEAR(fecha)", date('Y'));
+        $builder->where("iddet_entidad_empresa", $idEmpresa);
+        $builder->groupBy("MONTH(fecha)");
+        $builder->orderBy("mes", "ASC");
+
+        return $builder->get()->getResultArray();
+    }
+    public function obtenerTotalesEntradasPorMes($idEmpresa)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->select("MONTH(fecha) as mes, SUM(monto) as total");
+        $builder->whereIn('tipo', ['ENTRADA', 'SALDO']);
+        $builder->where("YEAR(fecha)", date('Y'));
+        $builder->where("iddet_entidad_empresa", $idEmpresa);
+        $builder->groupBy("MONTH(fecha)");
+        $builder->orderBy("mes", "ASC");
+
+        return $builder->get()->getResultArray();
+    }
 }

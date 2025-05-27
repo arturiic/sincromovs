@@ -12,7 +12,7 @@ class UsuariosModel extends Model
     {
     return $this->select('idusuarios, usuario')
                 ->where('estado', 'ACTIVO')
-                ->orderBy("(CASE WHEN idusuarios = 32 THEN 0 ELSE 1 END)", 'ASC') // Para que mi usuario aparezca primero
+                ->orderBy("(CASE WHEN idusuarios = 32 THEN 0 ELSE 1 END)", 'ASC')
                 ->orderBy('idusuarios','ASC') 
                 ->findAll();
     }

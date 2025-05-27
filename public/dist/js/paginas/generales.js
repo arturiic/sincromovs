@@ -123,10 +123,8 @@ function cargar_empresas() {
       if (response.success) {
         const empresaSelect = $('#cmbempresas');
         empresaSelect.empty(); // Limpia el select existente
-
         // Llena el select con las sucursales
         $.each(response.empresas, function (index, empresa) {
-
           empresaSelect.append(
             $('<option>', { value: empresa.idempresa, text: empresa.descripcion })
           );

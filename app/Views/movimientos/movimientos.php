@@ -53,27 +53,27 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-12">
+                                    <div class="col-8">
                                         <div class="form-group mb-3">
-                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observacion</label>
+                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
                                             <textarea class="form-control" rows="1" id="txtobservacion" name="txtobservacion"></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row row-cards mb-3">
                                     <div class="col-4">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
                                             <input type="date" class="form-control" id="datefecha" name="datefecha" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                </div>
+                                <div class="row row-cards mb-3">
+                                    <div class="col-6">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
                                             <input type="text" class="form-control" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
                                             <input type="text" class="form-control" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
@@ -124,27 +124,27 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-12">
+                                    <div class="col-8">
                                         <div class="form-group mb-3">
-                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observacion</label>
+                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
                                             <textarea class="form-control" rows="1" id="txtobservacion2" name="txtobservacion2"></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row row-cards mb-3">
                                     <div class="col-4">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
                                             <input type="date" class="form-control" id="datefecha2" name="datefecha2" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                </div>
+                                <div class="row row-cards mb-3">
+                                    <div class="col-6">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
                                             <input type="text" class="form-control" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group mb-3">
                                             <label><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
                                             <input type="text" class="form-control" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
@@ -181,7 +181,7 @@ $this->extend('dashboard/template.php'); ?>
                             <tbody></tbody>
                         </table>
                     </div>
-                    <button class="btn btn-6 btn-outline-warning d-sm-inline-block" onclick="abrirModalPDF()">
+                    <button class="btn btn-6 btn-warning d-sm-inline-block" onclick="abrirModalPDF()">
                         <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
                     </button>
                 </div>

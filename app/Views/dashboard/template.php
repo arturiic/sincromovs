@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <!--begin::Head-->
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>SincroMovimientos</title>
@@ -57,6 +58,7 @@
   <?= $this->renderSection('estilos'); ?>
   <!---------------------------------------   FIN CSS/ESTILOS  ---------------------------------------------------->
 </head>
+
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
   <!--begin::App Wrapper-->
   <div class="app-wrapper">
@@ -74,7 +76,7 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <button type="button" class="btn btn-block btn-primary btn-flat" onclick="abrirModalEmpresa()"><i class="fas fa-exchange-alt"></i></button>&nbsp;
-          <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario()"><i class="fa-solid fa-right-from-bracket"></i></i></i></button>
+          <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario()"><i class="fa-solid fa-right-from-bracket"></i></button>
           <!--end::Fullscreen Toggle-->
           <!--begin::User Menu Dropdown-->
           <li class=" nav-item user-menu">
@@ -103,8 +105,17 @@
             <div class="col-sm-6">
               <?= $this->renderSection('titulo_pagina'); ?>
             </div>
+            <!-- ESTILOS RESPONSIVOS PARA BREADCRUMB DE ALMACEN Y SUCURSAL -->
+            <style>
+              @media (max-width: 575.98px) {
+                .breadcrumb-responsive-inline .breadcrumb-item {
+                  font-size: 0.77rem !important;
+                }
+              }
+            </style>
+            <!-- ALMACEN Y SUCURSAL -->
             <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-end">
+              <ol class="breadcrumb float-sm-end breadcrumb-responsive-inline">
                 <li class="breadcrumb-item"><i class="fa-solid fa-industry"></i> <?= session('sucursal') ?></li>
                 <li class="breadcrumb-item"><i class="fa-solid fa-warehouse"></i> <?= session('almacen') ?></li>
               </ol>
@@ -139,8 +150,8 @@
   <!--end::App Wrapper-->
   <!-------------------------------------------------MODAL CREDENCIALES---------------------------------------------------------->
   <div class="modal modal-blur fade" id="mdlcambio" tabindex="-1" role="dialog" aria-labelledby="lbltitulo">
-     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
         <div class="modal-header">
           <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Cambio de Empresa</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -196,6 +207,7 @@
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <!-- DataTables Bootstrap 5 Integration -->
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- DataTables Responsive Extension -->
   <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
   <!-- SweetAlert2 -->
@@ -208,4 +220,5 @@
   <!---------------------------------------    SCRIPTS   ---------------------------------------------------->
 </body>
 <!--end::Body-->
+
 </html>
