@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>SincroMovimientos</title>
+  <?= $this->renderSection('titulo_pestaña'); ?><title>Movimientos | Dashboard</title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="AdminLTE | Dashboard v3" />

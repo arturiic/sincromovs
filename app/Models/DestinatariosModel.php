@@ -8,7 +8,7 @@ class DestinatariosModel extends Model
 {
     protected $table      = 'destinatario';
     protected $primaryKey = 'iddestinatario';
-    protected $allowedFields = ['iddestinatario', 'nombre', 'estado','fecha_creacion'];
+    protected $allowedFields = ['iddestinatario', 'nombre', 'estado'];
 
     public function traerDestinatarios()
     {

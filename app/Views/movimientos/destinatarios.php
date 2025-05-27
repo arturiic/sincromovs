@@ -1,5 +1,8 @@
 <?php
 $this->extend('dashboard/template.php'); ?>
+<?= $this->section('titulo_pestaña'); ?>
+<title>Movimientos | Destinatarios</title>
+<?= $this->endsection() ?>
 <?= $this->section('titulo_pagina'); ?>
 <h3 class="mb-0">Destinatarios</h3>
 <?= $this->endsection() ?>
@@ -13,10 +16,10 @@ $this->extend('dashboard/template.php'); ?>
                     <table id="tbldestinatarios" name="tbldestinatarios" class="table table-bordered table-hover dataTable dtr-inline">
                         <thead>
                             <tr>
-                                <th>Cod</th>
-                                <th>Nombre</th>
-                                <th>Estado</th>
-                                <th>Acción</th>
+                                <th class="bg-dark text-white">Cod</th>
+                                <th class="bg-dark text-white">Nombre</th>
+                                <th class="bg-dark text-white">Estado</th>
+                                <th class="bg-dark text-white">Acción</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

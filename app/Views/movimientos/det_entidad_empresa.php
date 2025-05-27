@@ -1,5 +1,8 @@
 <?php
 $this->extend('dashboard/template.php'); ?>
+<?= $this->section('titulo_pestaña'); ?>
+<title>Movimientos | Cuentas</title>
+<?= $this->endsection() ?>
 <?= $this->section('titulo_pagina'); ?>
 <h3 class="mb-0">Cuentas</h3>
 <?= $this->endsection() ?>
@@ -12,13 +15,13 @@ $this->extend('dashboard/template.php'); ?>
                 <div class="table-responsive">
                     <table id="tbldet_entidad_empresa" name="tbldet_entidad_empresa" class="table table-bordered table-hover dataTable dtr-inline">
                         <thead>
-                            <tr style="background-color: #000000;">
-                                <th>Cod</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
-                                <th>Entidad Bancaria</th>
-                                <th>Empresa</th>
-                                <th>Acción</th>
+                            <tr>
+                                <th class="bg-dark text-white">Cod</th>
+                                <th class="bg-dark text-white">Descripción</th>
+                                <th class="bg-dark text-white">Estado</th>
+                                <th class="bg-dark text-white">Entidad Bancaria</th>
+                                <th class="bg-dark text-white">Empresa</th>
+                                <th class="bg-dark text-white">Acción</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -43,25 +46,32 @@ $this->extend('dashboard/template.php'); ?>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtid" name="txtid">
-                <div class="col-lg-12">
-                    <div class="form-group mb-3">
-                        <label class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" placeholder="Descripción">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" placeholder="Descripción">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row mb-3">
-                <div class="col-lg-6">
-                    <label class="form-label">Estado</label>
-                    <select class="form-select" id="cmbestado" name="cmbestado">
-                        <option value="ACTIVO">ACTIVO</option>
-                        <option value="INACTIVO">INACTIVO</option>
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-label">Entidad Bancaria</label>
-                    <select class="form-select" id="cmbent_bancaria" name="cmbent_bancaria">
-                        <option value="1">BCP</option>
-                    </select>
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="cmbestado" name="cmbestado">
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Entidad Bancaria</label>
+                            <select class="form-select" id="cmbent_bancaria" name="cmbent_bancaria">
+                                <option value="1">BCP</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

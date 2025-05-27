@@ -21,7 +21,6 @@ class DestinatariosController extends Controller
         $model = new DestinatariosModel();
         $nombre = $this->request->getPost('nombre');
         $estado = $this->request->getPost('estado');
-        $fecha_creacion = $this->request->getPost('fecha_creacion');
 
         // Validar que el nombre no sea nulo o vacío
         if (empty($nombre)) {
@@ -34,7 +33,6 @@ class DestinatariosController extends Controller
 
         $data = [
             'nombre' => $nombre,
-            'fecha_creacion' => $fecha_creacion,
             'estado' => $estado
         ];
 
