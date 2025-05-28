@@ -51,7 +51,6 @@ class LoginController extends Controller
             'perfil' => $accessData->perfil,
             'nombre_personal' => $accessData->nombre_personal,
             'correo' => $accessData->correo,
-            'fotito' => $accessData->fotito,
             'urls' => $url_x_perfil,
             'is_logged' => true
           ]);

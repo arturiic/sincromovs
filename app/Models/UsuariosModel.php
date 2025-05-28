@@ -19,7 +19,7 @@ class UsuariosModel extends Model
     public function getAccessData($codusuario)
     {
         return $this->db->table('acceso ace')
-            ->select('ace.idusuarios codusu,usu.usuario AS nombre,usu.perfil AS perfil,usu.idusuarios,p.nombre AS nombre_personal,p.email AS correo, p.fotito as fotito')
+            ->select('ace.idusuarios codusu,usu.usuario AS nombre,usu.perfil AS perfil,usu.idusuarios,p.nombre AS nombre_personal,p.email AS correo')
             ->join('usuarios usu', 'ace.idusuarios = usu.idusuarios')
             ->join('personal p', 'usu.idpersonal = p.idpersonal')
             ->where('acceso', 'SI')

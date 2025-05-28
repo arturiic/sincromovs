@@ -6,11 +6,11 @@ class PersonalModel extends Model
 {
     protected $table      = 'personal';
     protected $primaryKey = 'idpersonal';
-    protected $allowedFields = ['nombre', 'fotito','email'];
+    protected $allowedFields = ['nombre','email'];
 
     public function nombreFotitoXcod($cod)
     {
-        return $this->select('nombre, fotito, email')
+        return $this->select('nombre, email')
             ->where('idpersonal', $cod)
             ->first();
     }
