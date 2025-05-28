@@ -188,10 +188,10 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="card-footer">
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-warning btn-sm w-100" onclick="abrirModalPDF()">
-                                        <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
-                                    </button>
+                                            <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
+                                        </button>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -250,13 +250,17 @@ $this->extend('dashboard/template.php'); ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
-                        <button class="btn btn-outline-danger btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="reportePDFmovimientos()">
-                            <i class="fa-solid fa-file-pdf"></i>&nbsp;PDF
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-lg"></i>&nbsp;Cerrar
                         </button>
-                        <button class="btn btn-outline-success btn-5 ms-auto" id="btnexcel" name="btnexcel" onclick="reporteExcelMovimientos()">
-                            <i class="fa-solid fa-file-excel"></i>&nbsp;Excel
-                        </button>
+                        <div class="d-flex ms-auto">
+                            <button class="btn btn-outline-danger btn-5" id="btngenerar" name="btngenerar" onclick="reportePDFmovimientos()">
+                                <i class="fa-solid fa-file-pdf"></i>&nbsp;PDF
+                            </button>
+                            <button class="btn btn-outline-success btn-5 ms-2" id="btnexcel" name="btnexcel" onclick="reporteExcelMovimientos()">
+                                <i class="fa-solid fa-file-excel"></i>&nbsp;Excel
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
