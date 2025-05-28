@@ -55,7 +55,6 @@ class LoginController extends Controller
             'is_logged' => true
           ]);
           //log_message('error', 'VARIABLES: ' . print_r(session()->get(), true));
-
           return $this->response->setJSON([
             'success' => true
           ]);

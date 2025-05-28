@@ -27,11 +27,11 @@ $this->extend('dashboard/template.php'); ?>
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             <!---------------------------------------------- TAB DE ENTRADA ------------------------------------------------>
                             <div class="tab-pane fade show active" id="tabentrada" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                                <div class="row row-cards">
-                                    <div class="col-12 mb-3">
+                                <div class="row row-cards mb-md-3">
+                                    <div class="col-md-10 col-12 mb-3 mb-md-0 order-md-1 order-2">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
-                                            <select class="form-select" id="cmbdetentempresa" name="cmbdetentempresa">
+                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
+                                            <select class="form-select form-select-sm" id="cmbdetentempresa" name="cmbdetentempresa">
                                                 <?php foreach ($cuentas as $cuentasreg): ?>
                                                     <option value="<?= esc($cuentasreg['iddet_entidad_empresa']); ?>">
                                                         <?= esc($cuentasreg['descripcion']); ?>
@@ -40,15 +40,20 @@ $this->extend('dashboard/template.php'); ?>
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0 order-md-2 order-1">
+                                        <button class="btn btn-success btn-sm w-100" id="btnsaldo" name="btnsaldo" onclick="abrirModalSaldo()">
+                                            <i class="fa-solid fa-money-bills"></i>&nbsp; Ingresar Saldo
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="row row-cards">
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
+                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
                                             <input type="hidden" id="txtiddest" name="txtiddest">
-                                            <div class="input-group">
+                                            <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario" name="txtdestinatario" placeholder="Destinatario" disabled>
-                                                <button class="btn btn-outline-primary" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
+                                                <button class="btn btn-outline-primary btn-sm" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                 </button>
                                             </div>
@@ -58,38 +63,33 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-lg-8 col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
-                                            <textarea class="form-control" rows="1" id="txtobservacion" name="txtobservacion"></textarea>
+                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
+                                            <textarea class="form-control form-control-sm" rows="1" id="txtobservacion" name="txtobservacion"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
-                                            <input type="date" class="form-control" id="datefecha" name="datefecha" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
+                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
+                                            <input type="date" class="form-control form-control-sm" id="datefecha" name="datefecha" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-lg-6 col-12 mb-3">
+                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
-                                            <input type="text" class="form-control" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
+                                            <input type="text" class="form-control form-control-sm" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-12 mb-3">
+                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
-                                            <input type="text" class="form-control" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
+                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row row-cards mt-3">
-                                    <div class="col-12 d-flex flex-nowrap overflow-auto gap-2">
-                                        <button class="btn btn-primary col-6 col-md-auto me-md-auto" onclick="registrarMovEntrada()">
+                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                        <button class="btn btn-primary btn-sm w-100" onclick="registrarMovEntrada()">
                                             <i class="fa-solid fa-floppy-disk"></i>&nbsp; Registrar
-                                        </button>
-                                        <button class="btn btn-success col-6 col-md-auto" id="btnsaldo" name="btnsaldo" onclick="abrirModalSaldo()">
-                                            <i class="fa-solid fa-money-bills"></i>&nbsp; Ingresar Saldo
                                         </button>
                                     </div>
                                 </div>
@@ -100,8 +100,8 @@ $this->extend('dashboard/template.php'); ?>
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" id="txtidmovsalida" name="txtidmovsalida">
-                                            <label><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
-                                            <select class="form-select" id="cmbdetentempresa2" name="cmbdetentempresa2">
+                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
+                                            <select class="form-select form-select-sm" id="cmbdetentempresa2" name="cmbdetentempresa2">
                                                 <?php foreach ($cuentas as $cuentasreg): ?>
                                                     <option value="<?= esc($cuentasreg['iddet_entidad_empresa']); ?>">
                                                         <?= esc($cuentasreg['descripcion']); ?>
@@ -114,11 +114,11 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
+                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
                                             <input type="hidden" id="txtiddest2" name="txtiddest2">
-                                            <div class="input-group">
+                                            <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario2" name="txtdestinatario2" placeholder="Destinatarios" disabled>
-                                                <button class="btn btn-outline-primary" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
+                                                <button class="btn btn-outline-primary btn-sm" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                 </button>
                                             </div>
@@ -128,222 +128,225 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-lg-8 col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
-                                            <textarea class="form-control" rows="1" id="txtobservacion2" name="txtobservacion2"></textarea>
+                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
+                                            <textarea class="form-control form-control-sm" rows="1" id="txtobservacion2" name="txtobservacion2"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-12 mb-3">
                                         <div class="form-group">
-                                            <label><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
-                                            <input type="date" class="form-control" id="datefecha2" name="datefecha2" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
+                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
+                                            <input type="date" class="form-control form-control-sm" id="datefecha2" name="datefecha2" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-lg-6 col-12 mb-3"">
+                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class=" form-group">
-                                        <label><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
-                                        <input type="text" class="form-control" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
+                                            <input type="text" class="form-control form-control-sm" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-12 mb-3">
-                                    <div class="form-group">
-                                        <label><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
-                                        <input type="text" class="form-control" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
+                                        <div class="form-group">
+                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
+                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                        <button class="btn btn-primary btn-sm w-100" onclick="registrarMovSalida()" id="btnregistrar2" name="btnregistrar2">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            &nbsp;Registrar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row-cards">
-                                <div class="col-12">
-                                    <button class="btn btn-primary col-12 col-md-auto me-md-auto" onclick="registrarMovSalida()" id="btnregistrar2" name="btnregistrar2">
-                                        <i class="fa-solid fa-floppy-disk"></i>
-                                        &nbsp;Registrar
+                        </div>
+                        <!------------------------------------------------- FIN DE TABS ----------------------------------------------------->
+                        <!------------------------------------------------ TABLA MOVIMIENTOS ---------------------------------------------------->
+                        <div class="col-sm-12 mt-md-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title mb-0"><i class="fas fa-list"></i> &nbsp;Registro de Movimientos</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="tblmovimientos" name="tblmovimientos" class="table table-bordered table-hover dataTable dtr-inline">
+                                            <thead>
+                                                <tr>
+                                                    <th class="bg-dark text-white">Destinatario</th>
+                                                    <th class="bg-dark text-white">Observación</th>
+                                                    <th class="bg-dark text-white">Fecha</th>
+                                                    <th class="bg-dark text-white">Monto</th>
+                                                    <th class="bg-dark text-white">N°Operación</th>
+                                                    <th class="bg-dark text-white">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                        <button class="btn btn-warning btn-sm w-100" onclick="abrirModalPDF()">
+                                        <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
                                     </button>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!------------------------------------------------- FIN DE TABS ----------------------------------------------------->
-            </div>
-            <!------------------------------------------------ TABLA MOVIMIENTOS ---------------------------------------------------->
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="tblmovimientos" name="tblmovimientos" class="table table-bordered table-hover dataTable dtr-inline">
-                        <thead>
-                            <tr>
-                                <th class="bg-dark text-white">Destinatario</th>
-                                <th class="bg-dark text-white">Observacion</th>
-                                <th class="bg-dark text-white">Fecha</th>
-                                <th class="bg-dark text-white">Monto</th>
-                                <th class="bg-dark text-white">N°Operación</th>
-                                <th class="bg-dark text-white">Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <button class="btn btn-6 btn-warning d-sm-inline-block" onclick="abrirModalPDF()">
-                    <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
-                </button>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!---------------------------------------------------MODAL DESTINATARIOS------------------------------------------------>
-<div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdleledestinatario" name="mdleledestinatario">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Elegir Destinatario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Buscador -->
-                        <div class="input-group mb-3">
-                            <input type="text" id="buscador" class="form-control" placeholder="Escribe al menos 1 letra..." autocomplete="off">
-                            <button class="btn btn-outline-primary" type="button" disabled>
-                                <i class="fas fa-search"></i>
+    <!---------------------------------------------------MODAL DESTINATARIOS------------------------------------------------>
+    <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdleledestinatario" name="mdleledestinatario">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Elegir Destinatario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Buscador -->
+                            <div class="input-group mb-3">
+                                <input type="text" id="buscador" class="form-control" placeholder="Escribe al menos 1 letra..." autocomplete="off">
+                                <button class="btn btn-outline-primary" type="button" disabled>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <!-- Resultados -->
+                            <ul id="resultados" class="list-group"></ul>
+                            <!-- Botón "Cargar más" -->
+                            <button id="cargarMas" class="btn btn-secondary btn-sm mt-2 w-100" style="display: none;">
+                                <i class="fas fa-sync-alt"></i> Cargar más
                             </button>
                         </div>
-                        <!-- Resultados -->
-                        <ul id="resultados" class="list-group"></ul>
-                        <!-- Botón "Cargar más" -->
-                        <button id="cargarMas" class="btn btn-secondary btn-sm mt-2 w-100" style="display: none;">
-                            <i class="fas fa-sync-alt"></i> Cargar más
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------------------MODAL PDF---------------------------------------------------------->
+    <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlpdf" name="mdlpdf">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 id="lbltitulos" name="lbltitulos" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Fecha de inicio:</label>
+                            <input type="date" class="form-control form-control-sm" id="dtpfechaini" name="dtpfechaini" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Fecha de fin:</label>
+                            <input type="date" class="form-control form-control-sm" id="dtpfechafin" name="dtpfechafin" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
+                        <button class="btn btn-outline-danger btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="reportePDFmovimientos()">
+                            <i class="fa-solid fa-file-pdf"></i>&nbsp;PDF
+                        </button>
+                        <button class="btn btn-outline-success btn-5 ms-auto" id="btnexcel" name="btnexcel" onclick="reporteExcelMovimientos()">
+                            <i class="fa-solid fa-file-excel"></i>&nbsp;Excel
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-------------------------------------------------------MODAL PDF---------------------------------------------------------->
-<div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlpdf" name="mdlpdf">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="lbltitulos" name="lbltitulos" class="modal-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label class="form-label">Fecha de inicio:</label>
-                        <input type="date" class="form-control" id="dtpfechaini" name="dtpfechaini" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label">Fecha de fin:</label>
-                        <input type="date" class="form-control" id="dtpfechafin" name="dtpfechafin" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
-                    </div>
+    <!---------------------------------------------------------MODAL SALDO----------------------------------------------------------------->
+    <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlingsaldo" name="mdlingsaldo">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 id="lbltitulo3" name="lbltitulo3" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                    <button class="btn btn-outline-danger btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="reportePDFmovimientos()">
-                        <i class="fa-solid fa-file-pdf"></i>&nbsp;PDF
-                    </button>
-                    <button class="btn btn-outline-success btn-5 ms-auto" id="btnexcel" name="btnexcel" onclick="reporteExcelMovimientos()">
-                        <i class="fa-solid fa-file-excel"></i>&nbsp;Excel
-                    </button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">Observacion</label>
+                                <input type="text" class="form-control form-control-sm" id="txtobservacionS" name="txtobservacionS" placeholder="Descripcion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">Saldo</label>
+                                <input type="text" class="form-control form-control-sm" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">N°Operación</label>
+                                <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
+                        <button class="btn btn-success btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="registrarMovSaldo()">
+                            <i class="fa-solid fa-money-bills"></i>&nbsp; Registrar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!---------------------------------------------------------MODAL SALDO----------------------------------------------------------------->
-<div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlingsaldo" name="mdlingsaldo">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="lbltitulo3" name="lbltitulo3" class="modal-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">Observacion</label>
-                            <input type="text" class="form-control" id="txtobservacionS" name="txtobservacionS" placeholder="Descripcion">
-                        </div>
-                    </div>
+    <!---------------------------------------------------------MODAL MOTIVO----------------------------------------------------------------->
+    <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlmotivo" name="mdlmotivo">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 id="lbltitulo4" name="lbltitulo4" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 col-12 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">Saldo</label>
-                            <input type="text" class="form-control" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">N° de Operación:</label>
+                            <input type="text" class="form-control form-control-sm" id="txtidoperacion" name="txtidoperacion" disabled>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Monto:</label>
+                            <input type="text" class="form-control form-control-sm" id="txtmontomotivo" name="txtmontomotivo" disabled>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-12 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">N°Operación</label>
-                            <input type="text" class="form-control" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                    <div class="mb-3">
+                        <div class="col-12">
+                            <label class="form-label">Enviado a:</label>
+                            <input type="text" class="form-control form-control-sm" id="txtenviadoa" name="txtenviadoa" disabled>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                    <button class="btn btn-success btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="registrarMovSaldo()">
-                        <i class="fa-solid fa-money-bills"></i>&nbsp; Registrar
-                    </button>
+                    <div class="mb-3">
+                        <div class="col-12">
+                            <label class="form-label">Motivo:</label>
+                            <input type="text" class="form-control form-control-sm" id="txtmotivo" name="txtmotivo" placeholder="Motivo">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
+                        <button class="btn btn-primary btn-5 ms-auto" onclick="editar()" id="btneditar" name="btneditar">
+                            <i class="fa-solid fa-square-plus"></i>
+                            &nbsp;Guardar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!---------------------------------------------------------MODAL MOTIVO----------------------------------------------------------------->
-<div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlmotivo" name="mdlmotivo">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="lbltitulo4" name="lbltitulo4" class="modal-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label class="form-label">N° de Operación:</label>
-                        <input type="text" class="form-control" id="txtidoperacion" name="txtidoperacion" disabled>
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label">Monto:</label>
-                        <input type="text" class="form-control" id="txtmontomotivo" name="txtmontomotivo" disabled>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="col-12">
-                        <label class="form-label">Enviado a:</label>
-                        <input type="text" class="form-control" id="txtenviadoa" name="txtenviadoa" disabled>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="col-12">
-                        <label class="form-label">Motivo:</label>
-                        <input type="text" class="form-control" id="txtmotivo" name="txtmotivo" placeholder="Motivo">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                    <button class="btn btn-primary btn-5 ms-auto" onclick="editar()" id="btneditar" name="btneditar">
-                        <i class="fa-solid fa-square-plus"></i>
-                        &nbsp;Guardar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<?= $this->endsection() ?>
+    <?= $this->endsection() ?>
 
-<?= $this->section('scripts') ?>
-<script src="<?= base_url('public/dist/js/paginas/movimientos.js') ?>"></script>
-<?= $this->endsection() ?>
+    <?= $this->section('scripts') ?>
+    <script src="<?= base_url('public/dist/js/paginas/movimientos.js') ?>"></script>
+    <?= $this->endsection() ?>

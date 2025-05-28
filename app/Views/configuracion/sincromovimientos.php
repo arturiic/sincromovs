@@ -21,19 +21,19 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="col-md-4 col-12 mb-3 mb-md-0">
                         <div class="form-group">
                             <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="datefechaini" value="<?php echo date('Y-m-d'); ?>"
+                            <input type="date" class="form-control form-control-sm" id="datefechaini" value="<?php echo date('Y-m-d'); ?>"
                                 max="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                     <div class="col-md-4 col-12 mb-3 mb-md-0">
                         <div class="form-group">
                             <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha de Fin</label>
-                            <input type="date" class="form-control" id="datefechafin" value="<?php echo date('Y-m-d'); ?>"
+                            <input type="date" class="form-control form-control-sm" id="datefechafin" value="<?php echo date('Y-m-d'); ?>"
                                 max="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                     <div class="col-md-4 col-12 d-flex align-items-end mb-3 mb-md-0">
-                        <button onclick="ver_movimientos_sincro()" class="btn btn-warning w-100">
+                        <button onclick="ver_movimientos_sincro()" class="btn btn-warning btn-sm w-100">
                             <i class="fa-regular fa-eye"></i>&nbsp;Ver Movimientos
                         </button>
                     </div>
@@ -57,7 +57,7 @@ $this->extend('dashboard/template.php'); ?>
                 </div>
             </div>
             <div class="card-footer">
-                <button onclick="insertarMovimientos()" class="btn btn-primary"><i class="fa-solid fa-plus"></i>
+                <button onclick="insertarMovimientos()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>
                     &nbsp;Insertar Movimientos</button>
             </div>
         </div>

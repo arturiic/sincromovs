@@ -58,7 +58,6 @@
   <?= $this->renderSection('estilos'); ?>
   <!---------------------------------------   FIN CSS/ESTILOS  ---------------------------------------------------->
 </head>
-
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
   <!--begin::App Wrapper-->
   <div class="app-wrapper">
@@ -75,7 +74,7 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <button type="button" class="btn btn-block btn-primary btn-flat" onclick="abrirModalEmpresa()"><i class="fas fa-exchange-alt"></i></button>&nbsp;
+          <button type="button" class="btn btn-block btn-primary btn-flat" onclick="abrirModalEmpresa()"><i class="fa-solid fa-building-user"></i></button>&nbsp;
           <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario()"><i class="fa-solid fa-right-from-bracket"></i></button>
           <!--end::Fullscreen Toggle-->
           <!--begin::User Menu Dropdown-->
@@ -152,7 +151,7 @@
   <div class="modal modal-blur fade" id="mdlcambio" tabindex="-1" role="dialog" aria-labelledby="lbltitulo">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header bg-primary text-white">
           <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Cambio de Empresa</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -171,7 +170,7 @@
           </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
           <button type="button" class="btn btn-primary" id="btnguardar" name="btnguardar" onclick="cambioEmpresa()">
             <i class="fas fa-exchange-alt"></i>&nbsp;Cambiar</button>
         </div>

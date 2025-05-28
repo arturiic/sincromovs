@@ -31,7 +31,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= base_url('config/sincromovimi') ?>" class="nav-link">
-                                <i class="nav-icon fa-solid fa-circle-check"></i>
+                                <i class="nav-icon fa-solid fa-arrows-rotate"></i>
                                 <p>Sincro. Movimientos</p>
                             </a>
                         </li>
@@ -45,19 +45,19 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= base_url('movimientos/destinatarios') ?>" class="nav-link">
-                                <i class="nav-icon fa-solid fa-circle-check"></i>
+                                <i class="nav-icon fa-solid fa-users"></i>
                                 <p>Destinatarios</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url('movimientos/det_entidad_empresa') ?>" class="nav-link">
-                                <i class="nav-icon fa-solid fa-circle-check"></i>
+                                <i class="nav-icon fa-solid fa-money-check-dollar"></i>
                                 <p>Cuentas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url('movimientos/movimientos') ?>" class="nav-link">
-                                <i class="nav-icon fa-solid fa-circle-check"></i>
+                                <i class="nav-icon fas fa-exchange-alt"></i>
                                 <p>Movimientos</p>
                             </a>
                         </li>

@@ -165,6 +165,8 @@
     @media (max-width: 480px) {
         .material-login-card {
             padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+            max-width: 88vw;
+            width: 108vw;
         }
         .material-form-group input,
         .material-form-group select {

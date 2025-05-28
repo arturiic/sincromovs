@@ -40,7 +40,7 @@ $this->extend('dashboard/template.php'); ?>
 <div class="modal fade" id="mdldet_entidad_empresa" tabindex="-1" role="dialog" aria-labelledby="lbltitulo" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h5 id="lbltitulo" name="lbltitulo" class="modal-title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -50,7 +50,7 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="col-12 mb-3">
                         <div class="form-group">
                             <label class="form-label">Descripción</label>
-                            <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" placeholder="Descripción">
+                            <input type="text" class="form-control form-control-sm" id="txtdescripcion" name="txtdescripcion" placeholder="Descripción">
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="col-lg-6 col-12 mb-3">
                         <div class="form-group">
                             <label class="form-label">Estado</label>
-                            <select class="form-select" id="cmbestado" name="cmbestado">
+                            <select class="form-select form-select-sm" id="cmbestado" name="cmbestado">
                                 <option value="ACTIVO">ACTIVO</option>
                                 <option value="INACTIVO">INACTIVO</option>
                             </select>
@@ -67,7 +67,7 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="col-lg-6 col-12 mb-3">
                         <div class="form-group">
                             <label class="form-label">Entidad Bancaria</label>
-                            <select class="form-select" id="cmbent_bancaria" name="cmbent_bancaria">
+                            <select class="form-select form-select-sm" id="cmbent_bancaria" name="cmbent_bancaria">
                                 <option value="1">BCP</option>
                             </select>
                         </div>
@@ -75,11 +75,11 @@ $this->extend('dashboard/template.php'); ?>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnregistrar" name="btnregistrar" onclick="registrar()">
-                    <i class="fas fa-exchange-alt"></i>&nbsp; Registrar</button>
+                    <i class="fas fa-plus"></i>&nbsp; Registrar</button>
                 <button type="button" class="btn btn-warning" id="btneditar" name="btneditar" onclick="editar()">
-                    <i class="fas fa-exchange-alt"></i>&nbsp; Editar</button>
+                    <i class="fas fa-pencil"></i>&nbsp; Editar</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("#buscador").keyup(function () {
         terminoActual = $(this).val();
         pagina = 1; // Reiniciar la paginación
-        buscarDestinatarios(true);
+        buscarDestinatarios(true); 
     });
     // 1. Evento para limpiar campos al cambiar de pestaña
     $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -194,6 +194,12 @@ function obtenerMovimientos() {
 
             //console.log(response);
             var movimientos = response[0];
+            var table = $('#tblmovimientos').DataTable();
+            
+            // Destruye la instancia existente de DataTable si existe
+            if ($.fn.DataTable.isDataTable('#tblmovimientos')) {
+                table.destroy();
+            }
             //console.log('Respuesta completa del servidor:', response);
             $('#tblmovimientos tbody').empty();
             if (Array.isArray(movimientos)) {
@@ -227,6 +233,14 @@ function obtenerMovimientos() {
                         '</tr>';
                     $('#tblmovimientos').append(fila);
                 });
+                // Inicializa DataTables con las opciones
+                $('#tblmovimientos').DataTable({
+                    "language": {
+                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                    },
+                    "retrieve": true, // Permite recuperar la instancia existente
+                    "destroy": true // Permite destruir la instancia anterior si existe
+                });
             }
         },
         error: function (xhr, status, error) {
@@ -247,6 +261,12 @@ function obtenerMovimientoSalida() {
 
             //console.log(response);
             var movimientos = response[0];
+            var table = $('#tblmovimientos').DataTable();
+            
+            // Destruye la instancia existente de DataTable si existe
+            if ($.fn.DataTable.isDataTable('#tblmovimientos')) {
+                table.destroy();
+            }
             $('#tblmovimientos tbody').empty();
             if (Array.isArray(movimientos)) {
                 movimientos.forEach(function (mov) {
@@ -278,6 +298,14 @@ function obtenerMovimientoSalida() {
                         '</td>' +
                         '</tr>';
                     $('#tblmovimientos').append(fila);
+                });
+                // Inicializa DataTables con las opciones
+                $('#tblmovimientos').DataTable({
+                    "language": {
+                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                    },
+                    "retrieve": true, // Permite recuperar la instancia existente
+                    "destroy": true // Permite destruir la instancia anterior si existe
                 });
             }
         },

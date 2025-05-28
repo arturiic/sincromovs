@@ -28,7 +28,7 @@ $routes->group('cambio', ['filter' => 'CambioFilter'], function ($routes) {
 });
 //RUTAS PARA EL PADRE MOVIMIENTOS
 $routes->group('movimientos',['filter' => 'AuthFilter'], function ($routes) {
-    $routes->get('sincro', 'SincromovimientosController::sincronizacion_movimientos');
+    $routes->get('sincro', 'SincroMovimientosController::sincronizacion_movimientos');
     $routes->post('insertar_sincromov', 'MovimientosController::guardarMovimientos');
     $routes->post('registrar_xml', 'MovimientosController::registrarMovimientos');
     $routes->get('movEntradaXfecha', 'MovimientosController::movEntradaXfecha');
