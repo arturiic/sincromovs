@@ -145,16 +145,16 @@ class MovimientosController extends Controller
         $fechaModel = new MovimientosModel();
         $fecha = $this->request->getGet('fecha');
         $entidademp = $this->request->getGet('entidad');
-        $movimientos =  $fechaModel->movEntradaXfecha($fecha, $entidademp);
-        return $this->response->setJSON([$movimientos]);
+        $data =  $fechaModel->movEntradaXfecha($fecha, $entidademp);
+        return $this->response->setJSON(['data' => $data]);
     }
     public function movSalidaXfecha()
     {
         $fechaModel = new MovimientosModel();
         $fecha = $this->request->getGet('fecha');
         $entidademp = $this->request->getGet('entidad');
-        $movimientos =  $fechaModel->movSalidaXfecha($fecha, $entidademp);
-        return $this->response->setJSON([$movimientos]);
+        $data =  $fechaModel->movSalidaXfecha($fecha, $entidademp);
+        return $this->response->setJSON(['data' => $data]);
     }
 
     //PARA ELIMINAR REGISTROS

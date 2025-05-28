@@ -1,6 +1,8 @@
 let terminoActual = "";
 let filaSeleccionada = null;
 let pagina = 1;
+let tableMovimientos = null;
+let currentTab = 'entrada';
 
 var table = "";
 
@@ -8,37 +10,166 @@ $(document).ready(function () {
     $("#buscador").keyup(function () {
         terminoActual = $(this).val();
         pagina = 1; // Reiniciar la paginación
-        buscarDestinatarios(true); 
+        buscarDestinatarios(true);
     });
     // 1. Evento para limpiar campos al cambiar de pestaña
-    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-        var targetTab = $(e.target).attr('href'); // Obtiene el ID del tab activo
-
-        // 2. Decide qué función de limpieza ejecutar según el tab
-        if (targetTab === '#tabentrada') {
-            obtenerMovimientos(); // Recarga datos si es necesario
-        } else if (targetTab === '#tabsalida') {
-            obtenerMovimientoSalida(); // Recarga datos si es necesario
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+        const target = $(e.target).attr('href');
+        if (target === '#tabentrada') {
+            currentTab = 'entrada';
+        } else if (target === '#tabsalida') {
+            currentTab = 'salida';
         }
+        actualizarTabla();
     });
+
     $("#cargarMas").click(function () {
         pagina++; // Aumentar la página
         buscarDestinatarios(false);
     });
-    $("#datefecha").change(function () {
-        obtenerMovimientos();
+    // Eventos para filtros
+    $("#datefecha, #cmbdetentempresa").change(function() {
+        if (currentTab === 'entrada') actualizarTabla();
     });
-    $("#datefecha2").change(function () {
-        obtenerMovimientoSalida();
+
+    $("#datefecha2, #cmbdetentempresa2").change(function() {
+        if (currentTab === 'salida') actualizarTabla();
     });
-    $("#cmbdetentempresa").change(function () {
-        obtenerMovimientos();
-    });
-    $("#cmbdetentempresa2").change(function () {
-        obtenerMovimientoSalida();
-    });
-    obtenerMovimientos();
+    inicializarTabla();
 });
+
+function inicializarTabla() {
+    tableMovimientos = $('#tblmovimientos').DataTable({
+        "language": {
+            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+        },
+        "responsive": true,
+        "processing": true,
+        "serverSide": false,
+        "ajax": {
+            "url": URL_PY + 'movimientos/movEntradaXfecha',
+            "type": "GET",
+            "data": function() {
+                return getCurrentParams();
+            }
+        },
+        "columns": [
+            { "data": "destinatario",
+                "width": "30%",
+             },
+            { "data": "observacion",
+                "width": "30%",
+             },
+            { "data": "fecha",
+                "width": "10%",
+             },
+            { 
+                "data": "monto",
+                "width": "10%",
+                "render": function(data, type, row) {
+                    return currentTab === 'entrada' ? 
+                        `<span class="text-success">+${data}</span>` : 
+                        `<span class="text-danger">-${data}</span>`;
+                }
+            },
+            { "data": "noperacion",
+                "width": "10%",
+             },
+            {
+                "data": "idmov_finanzas",
+                "orderable": false,
+                "className": "text-center",
+                "width": "15%",
+                "render": function(data, type, row) {
+                    return `
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-warning mx-1" 
+                            onclick="mostrarMovimiento(${data}, '${currentTab}')"
+                            title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger mx-1" 
+                            onclick="eliminarMovimiento(${data}, '${currentTab}')"
+                            title="Eliminar">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>`;
+                }
+            }
+        ]
+    });
+}
+
+function getCurrentParams() {
+    if (currentTab === 'entrada') {
+        return {
+            "fecha": $('#datefecha').val(),
+            "entidad": $('#cmbdetentempresa').val()
+        };
+    } else {
+        return {
+            "fecha": $('#datefecha2').val(),
+            "entidad": $('#cmbdetentempresa2').val()
+        };
+    }
+}
+
+function actualizarTabla() {
+    if (tableMovimientos) {
+        tableMovimientos.ajax.url(
+            currentTab === 'entrada' ? 
+            URL_PY + 'movimientos/movEntradaXfecha' : 
+            URL_PY + 'movimientos/movSalidaXfecha'
+        ).load();
+    }
+}
+
+function mostrarMovimiento(id, tipo) {
+    if (tipo === 'entrada') {
+        mostrarMovEntradaX(id);
+    } else {
+        mostrarMovSalidaX(id);
+    }
+}
+
+function eliminarMovimiento(idmov_finanzas) {
+    Swal.fire({
+        title: "¿Estás seguro de eliminar este movimiento?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: URL_PY + 'movimientos/eliminar',
+                data: { idmovfinanzas: idmov_finanzas },
+                success: function (response) {
+                    if (response.error) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ELIMINACIÓN FALLIDA",
+                            text: response.error
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "success",
+                            title: "REGISTRO ELIMINADO",
+                            text: response.message
+                        }).then(() => {
+                            actualizarTabla();
+                        });
+                    }
+                },
+            });
+        }
+    });
+}
+
 function elegirDestinatario() {
     filaSeleccionada = $(this).closest("tr");
     $('#buscador').val('');
@@ -182,184 +313,6 @@ function registrarMovSalida() {
     });
 }
 
-function obtenerMovimientos() {
-    var fecha = $('#datefecha').val();
-    var entidad = $('#cmbdetentempresa').val();
-
-    $.ajax({
-        type: "GET",
-        url: URL_PY + 'movimientos/movEntradaXfecha',
-        data: { fecha: fecha, entidad: entidad },
-        success: function (response) {
-
-            //console.log(response);
-            var movimientos = response[0];
-            var table = $('#tblmovimientos').DataTable();
-            
-            // Destruye la instancia existente de DataTable si existe
-            if ($.fn.DataTable.isDataTable('#tblmovimientos')) {
-                table.destroy();
-            }
-            //console.log('Respuesta completa del servidor:', response);
-            $('#tblmovimientos tbody').empty();
-            if (Array.isArray(movimientos)) {
-                movimientos.forEach(function (mov) {
-                    var fila = '<tr>' +
-                        '<td>' + mov.destinatario + '</td>' +
-                        '<td>' + mov.observacion + '</td>' +
-                        '<td>' + mov.fecha + '</td>' +
-                        '<td>' + mov.monto + '</td>' +
-                        '<td>' + mov.noperacion + '</td>' +
-                        '<td style="width: 1%; white-space: nowrap; padding-right: 0; text-align: center;">' +
-                        '<div class="dropdown" style="display: inline-block;">' +
-                        '<button class="btn btn-sm btn-primary dropdown-toggle" type="button" ' +
-                        'style="padding: 0.25rem 0.5rem; min-width: 30px;" ' +
-                        'id="dropdownMenuButton' + mov.idmov_finanzas + '" ' +
-                        'data-bs-toggle="dropdown" aria-expanded="false">' +
-                        '<i class="fa-solid fa-ellipsis-vertical"></i>' +
-                        '</button>' +
-                        '<ul class="dropdown-menu" ' +
-                        'style="min-width: 120px; font-size: 0.875rem; padding: 0.25rem 0;" ' +
-                        'aria-labelledby="dropdownMenuButton' + mov.idmov_finanzas + '">' +
-                        '<li><a class="dropdown-item" href="#" style="padding: 0.25rem 1rem; color:rgb(226, 230, 105);" ' +
-                        'onclick="mostrarMovSalidaX(' + mov.idmov_finanzas + ')">' +
-                        '<i class="fa-solid fa-square-plus me-2"></i>Editar</a></li>' +
-                        '<li><a class="dropdown-item" href="#" style="padding: 0.25rem 1rem; color: #dc3545;" ' +
-                        'onclick="eliminarEntrada(' + mov.idmov_finanzas + ')">' +
-                        '<i class="fa-solid fa-trash me-2"></i>Eliminar</a></li>' +
-                        '</ul>' +
-                        '</div>' +
-                        '</td>' +
-                        '</tr>';
-                    $('#tblmovimientos').append(fila);
-                });
-                // Inicializa DataTables con las opciones
-                $('#tblmovimientos').DataTable({
-                    "language": {
-                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-                    },
-                    "retrieve": true, // Permite recuperar la instancia existente
-                    "destroy": true // Permite destruir la instancia anterior si existe
-                });
-            }
-        },
-        error: function (xhr, status, error) {
-            //console.error("Error en la solicitud:", status, error);
-        }
-    });
-}
-
-function obtenerMovimientoSalida() {
-    var fecha = $('#datefecha2').val();
-    var entidad = $('#cmbdetentempresa2').val();
-
-    $.ajax({
-        type: "GET",
-        url: URL_PY + 'movimientos/movSalidaXfecha',
-        data: { fecha: fecha, entidad: entidad },
-        success: function (response) {
-
-            //console.log(response);
-            var movimientos = response[0];
-            var table = $('#tblmovimientos').DataTable();
-            
-            // Destruye la instancia existente de DataTable si existe
-            if ($.fn.DataTable.isDataTable('#tblmovimientos')) {
-                table.destroy();
-            }
-            $('#tblmovimientos tbody').empty();
-            if (Array.isArray(movimientos)) {
-                movimientos.forEach(function (mov) {
-                    var fila = '<tr>' +
-                        '<td>' + mov.destinatario + '</td>' +
-                        '<td>' + mov.observacion + '</td>' +
-                        '<td>' + mov.fecha + '</td>' +
-                        '<td>' + mov.monto + '</td>' +
-                        '<td>' + mov.noperacion + '</td>' +
-                        '<td style="width: 1%; white-space: nowrap; padding-right: 0; text-align: center;">' +
-                        '<div class="dropdown" style="display: inline-block;">' +
-                        '<button class="btn btn-sm btn-primary dropdown-toggle" type="button" ' +
-                        'style="padding: 0.25rem 0.5rem; min-width: 30px;" ' +
-                        'id="dropdownMenuButton' + mov.idmov_finanzas + '" ' +
-                        'data-bs-toggle="dropdown" aria-expanded="false">' +
-                        '<i class="fa-solid fa-ellipsis-vertical"></i>' +
-                        '</button>' +
-                        '<ul class="dropdown-menu" ' +
-                        'style="min-width: 120px; font-size: 0.875rem; padding: 0.25rem 0;" ' +
-                        'aria-labelledby="dropdownMenuButton' + mov.idmov_finanzas + '">' +
-                        '<li><a class="dropdown-item" href="#" style="padding: 0.25rem 1rem; color:rgb(226, 230, 105);" ' +
-                        'onclick="mostrarMovSalidaX(' + mov.idmov_finanzas + ')">' +
-                        '<i class="fa-solid fa-square-plus me-2"></i>Editar</a></li>' +
-                        '<li><a class="dropdown-item" href="#" style="padding: 0.25rem 1rem; color: #dc3545;" ' +
-                        'onclick="eliminarEntrada(' + mov.idmov_finanzas + ')">' +
-                        '<i class="fa-solid fa-trash me-2"></i>Eliminar</a></li>' +
-                        '</ul>' +
-                        '</div>' +
-                        '</td>' +
-                        '</tr>';
-                    $('#tblmovimientos').append(fila);
-                });
-                // Inicializa DataTables con las opciones
-                $('#tblmovimientos').DataTable({
-                    "language": {
-                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-                    },
-                    "retrieve": true, // Permite recuperar la instancia existente
-                    "destroy": true // Permite destruir la instancia anterior si existe
-                });
-            }
-        },
-        error: function (xhr, status, error) {
-            //console.error("Error en la solicitud:", status, error);
-        }
-    });
-}
-
-function eliminarEntrada(idmov_finanzas) {
-    Swal.fire({
-        title: "¿Estás seguro?",
-        text: "Esta acción no se puede deshacer.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: "POST",
-                url: URL_PY + 'movimientos/eliminar',
-                data: { idmovfinanzas: idmov_finanzas },
-                success: function (response) {
-                    if (response.error) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "ELIMINACIÓN FALLIDA",
-                            text: response.error
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: "success",
-                            title: "REGISTRO ELIMINADO",
-                            text: response.message
-                        }).then(() => {
-                            var tabActiva = $('.nav-tabs .active').attr('href');
-
-                            // Recargamos la tabla correspondiente
-                            if (tabActiva === '#tabentrada') {
-                                obtenerMovimientos(); // Recarga tabla de ENTRADAS
-                            } else if (tabActiva === '#tabsalida') {
-                                obtenerMovimientoSalida(); // Recarga tabla de SALIDAS
-                            }
-                        });
-                    }
-                },
-            });
-        }
-    });
-}
-
 function limpiar() {
     $('#txtiddest').val('');
     $('#txtdestinatario').val('');
@@ -399,7 +352,7 @@ function reportePDFmovimientos() {
     // Crear un formulario temporal
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = URL_PY + 'movimientos/reporte_movimientos', 
+    form.action = URL_PY + 'movimientos/reporte_movimientos',
         form.target = '_blank';
 
     // Crear campos de formulario para los datos
@@ -443,7 +396,7 @@ function registrarMovSaldo() {
                     title: 'REGISTRO DE MOVIMIENTOS',
                     text: response,
                 }).then(function () {
-                    obtenerMovimientos();
+                    actualizarTabla();
                     $("#mdlingsaldo").modal('hide')
                 });
             } else {
@@ -537,16 +490,7 @@ function editar() {
                     text: response.message,
                 }).then(function () {
                     $('#mdlmotivo').modal('hide');
-                    // Verificamos qué pestaña está activa
-                    var tabActiva = $('.nav-tabs .active').attr('href');
-
-                    // Recargamos la tabla correspondiente
-                    if (tabActiva === '#tabentrada') {
-                        obtenerMovimientos(); // Recarga tabla de ENTRADAS
-                    } else if (tabActiva === '#tabsalida') {
-                        obtenerMovimientoSalida(); // Recarga tabla de SALIDAS
-                    }
-
+                    actualizarTabla();
                 });
             }
         }
