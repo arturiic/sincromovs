@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
 });
 
-function loguear_sistema() {
+function loguearSistema() {
     var usu = $('#cmbusuario').val();
     var pass = $('#txtpassword').val();
 

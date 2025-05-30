@@ -8,31 +8,31 @@ use App\Models\AccesoModel;
 
 class AccesoController extends BaseController
 {
-    public function get_empresas()
+    public function getEmpresas()
     {
         $codigousuario = session()->get('usuario');
         $accesoModel = new AccesoModel();
-        $data = $accesoModel->traer_empresas($codigousuario);
+        $data = $accesoModel->getEmpresas($codigousuario);
         //log_message('error', 'Usuario desde sesión: ' . print_r($codigousuario, true));
         return $this->response->setJSON(['success' => true, 'empresas' => $data]);
     }
 
-    public function get_sucursales()
+    public function getSucursales()
     {
         $codigoempresa = $this->request->getPost('empresa');
         $accesoModel = new AccesoModel();
-        $data = $accesoModel->traer_sucursales($codigoempresa);
+        $data = $accesoModel->getSucursales($codigoempresa);
         return $this->response->setJSON(['success' => true, 'sucursales' => $data]);
     }
 
-    public function get_almacenes()
+    public function getAlmacenes()
     {
         $codigosucursal = $this->request->getPost('sucursal');
         $accesoModel = new AccesoModel();
-        $data = $accesoModel->traer_almacenes($codigosucursal);
+        $data = $accesoModel->getAlmacenes($codigosucursal);
         return $this->response->setJSON(['success' => true, 'almacenes' => $data]);
     }
-    public function accesoalmacen()
+    public function accesoAlmacen()
     {
         $usuario = session()->get('usuario');
 

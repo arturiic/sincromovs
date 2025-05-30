@@ -8,7 +8,7 @@ class UsuariosModel extends Model
     protected $primaryKey = 'idusuarios';
     protected $allowedFields = ['usuario', 'clave'];
 
-    public function usuarios_activos()
+    public function usuariosActivos()
     {
     return $this->select('idusuarios, usuario')
                 ->where('estado', 'ACTIVO')

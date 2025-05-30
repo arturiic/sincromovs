@@ -33,7 +33,7 @@ $this->extend('dashboard/template.php'); ?>
                         </div>
                     </div>
                     <div class="col-md-4 col-12 d-flex align-items-end mb-3 mb-md-0">
-                        <button onclick="ver_movimientos_sincro()" class="btn btn-warning btn-sm w-100">
+                        <button onclick="verSincronizacionMovimientos()" class="btn btn-warning btn-sm w-100">
                             <i class="fa-regular fa-eye"></i>&nbsp;Ver Movimientos
                         </button>
                     </div>

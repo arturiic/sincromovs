@@ -7,7 +7,7 @@ class AccesoModel extends Model
     protected $primaryKey       = 'idacceso';
     protected $allowedFields    = ['idusuarios','idsucursal','acceso'];
 
-    public function traer_empresas($codigousuario)  {
+    public function getEmpresas($codigousuario)  {
         return $this->distinct()
         ->select ('emp.idempresa, emp.descripcion')
         ->join('sucursal suc','ace.idsucursal = suc.idsucursal')
@@ -19,7 +19,7 @@ class AccesoModel extends Model
     }
 
     // TRAER SUCURSAL
-    public function traer_sucursales($codigoempresa) {
+    public function getSucursales($codigoempresa) {
         return $this->distinct()
             ->select('suc.idsucursal, suc.descripcion')
             ->join('sucursal suc', 'ace.idsucursal = suc.idsucursal')
@@ -29,7 +29,7 @@ class AccesoModel extends Model
             ->findAll();
     }
     // TRAER ALMACENES
-    public function traer_almacenes($codigosucursal) {
+    public function getAlmacenes($codigosucursal) {
         return $this->distinct()
             ->select('alm.idalmacen, alm.descripcion')
             ->join('sucursal suc', 'ace.idsucursal = suc.idsucursal')

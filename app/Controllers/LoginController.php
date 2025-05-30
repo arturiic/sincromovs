@@ -9,7 +9,7 @@ class LoginController extends Controller
     public function index()
   {
     $usuarios = new UsuariosModel();
-    $data['usuarios'] = $usuarios->usuarios_activos();
+    $data['usuarios'] = $usuarios->usuariosActivos();
     return view('login/login', $data);
   }
   public function unauthorized()
@@ -22,7 +22,7 @@ class LoginController extends Controller
     $session->destroy();
     return redirect()->to('/login');
   }
-  public function logueo_ingreso()
+  public function logueoIngreso()
   {    
     $clave = $this->request->getPost('password');
     $usuario = $this->request->getPost('idusuario');

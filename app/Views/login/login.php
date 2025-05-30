@@ -220,7 +220,7 @@
                     </span>
                 </div>
                 <div class="material-login-actions">
-                    <button type="button" onclick="loguear_sistema()" class="material-btn material-btn-primary">INGRESAR</button>
+                    <button type="button" onclick="loguearSistema()" class="material-btn material-btn-primary">INGRESAR</button>
                     <a href="https://grupoasiu.com/" class="material-btn material-btn-danger" style="text-align:center;line-height:2.2;">SALIR</a>
                 </div>
             </div>

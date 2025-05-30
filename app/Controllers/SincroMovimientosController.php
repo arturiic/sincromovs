@@ -10,7 +10,7 @@ class SincroMovimientosController extends Controller
     {
         return view('configuracion/sincromovimientos');
     }
-    public function sincronizacion_movimientos()
+    public function sincronizacionMovimientos()
     {
         // Aumentar el tiempo de ejecución para operaciones IMAP
         set_time_limit(300); // 5 minutos

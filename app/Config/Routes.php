@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->group('login', function ($routes) {
     $routes->get('/', 'LoginController::index');
-    $routes->post('ingresar', 'LoginController::logueo_ingreso');
+    $routes->post('ingresar', 'LoginController::logueoIngreso');
     $routes->get('salir', 'LoginController::salir');
 });
 
@@ -21,14 +21,14 @@ $routes->group('config', ['filter' => 'AuthFilter'], function ($routes) {
 });
 
 $routes->group('cambio', ['filter' => 'CambioFilter'], function ($routes) {
-    $routes->post('empresa', 'AccesoController::get_empresas');
-    $routes->post('sucursal', 'AccesoController::get_sucursales');
-    $routes->post('almacen', 'AccesoController::get_almacenes');
-    $routes->post('ingresar', 'AccesoController::accesoalmacen');
+    $routes->post('empresa', 'AccesoController::getEmpresas');
+    $routes->post('sucursal', 'AccesoController::getSucursales');
+    $routes->post('almacen', 'AccesoController::getAlmacenes');
+    $routes->post('ingresar', 'AccesoController::accesoAlmacen');
 });
 //RUTAS PARA EL PADRE MOVIMIENTOS
 $routes->group('movimientos',['filter' => 'AuthFilter'], function ($routes) {
-    $routes->get('sincro', 'SincroMovimientosController::sincronizacion_movimientos');
+    $routes->get('sincro', 'SincroMovimientosController::sincronizacionMovimientos');
     $routes->post('insertar_sincromov', 'MovimientosController::guardarMovimientos');
     $routes->post('registrar_xml', 'MovimientosController::registrarMovimientos');
     $routes->get('movEntradaXfecha', 'MovimientosController::movEntradaXfecha');
@@ -60,9 +60,5 @@ $routes->group('detEntidadEmpresas', ['filter' => 'CambioFilter'], function ($ro
     $routes->post('editar', 'DetEntidadEmpresaController::update');
     $routes->get('dtDetEntidadEmpresas', 'DetEntidadEmpresaController::traerDetEntidadEmpresa');
     $routes->get('det_entidad_empresasxcod', 'DetEntidadEmpresaController::detEntidadEmpresaXcod');
-});
-
-$routes->group('personal', ['filter' => 'CambioFilter'], function ($routes) {
-    $routes->get('personalxcod', 'PersonalController::nombreFotitoXcod');
 });
 

@@ -102,18 +102,18 @@ if (codalmacen == 'NL') {
 };
 
 $(document).ready(function () {
-  cargar_empresas();
+  cargarEmpresas();
 });
 $("#cmbempresas").change(function () {
   var empresaSeleccionada = $(this).val();
-  cargar_sucursales_x_empresa(empresaSeleccionada);
+  cargarSucursalesXempresa(empresaSeleccionada);
 });
 $("#cmbsucursal").change(function () {
   var sucursalSeleccionada = $(this).val();
-  cargar_almacen_x_sucursal(sucursalSeleccionada);
+  cargarAlmacenXsucursal(sucursalSeleccionada);
 });
 
-function cargar_empresas() {
+function cargarEmpresas() {
   var url = URL_PY + 'cambio/empresa';
   $.ajax({
     type: "POST",
@@ -130,7 +130,7 @@ function cargar_empresas() {
           );
         });
         // Llenar almacén basado en la primera sucursal
-        cargar_sucursales_x_empresa(empresaSelect.val());
+        cargarSucursalesXempresa(empresaSelect.val());
       } else {
         alert('No hay empresas');
       }
@@ -140,7 +140,7 @@ function cargar_empresas() {
     }
   });
 }
-function cargar_sucursales_x_empresa(empresa) {
+function cargarSucursalesXempresa(empresa) {
   var url = URL_PY + 'cambio/sucursal';
   $.ajax({
     type: "POST",
@@ -160,7 +160,7 @@ function cargar_sucursales_x_empresa(empresa) {
         });
 
         // Llenar almacén basado en la primera sucursal
-        cargar_almacen_x_sucursal(sucursalSelect.val());
+        cargarAlmacenXsucursal(sucursalSelect.val());
       } else {
         alert('No hay sucursales');
       }
@@ -170,7 +170,7 @@ function cargar_sucursales_x_empresa(empresa) {
     }
   });
 }
-function cargar_almacen_x_sucursal(sucursal) {
+function cargarAlmacenXsucursal(sucursal) {
   var url = URL_PY + 'cambio/almacen';
   $.ajax({
     type: "POST",

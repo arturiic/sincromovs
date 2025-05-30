@@ -84,7 +84,7 @@ function inicializarTabla() {
                     return `
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-warning mx-1" 
-                            onclick="mostrarMovimiento(${data}, '${currentTab}')"
+                            onclick="mostrarMovimientosX(${data}, '${currentTab}')"
                             title="Editar">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
@@ -121,14 +121,6 @@ function actualizarTabla() {
             URL_PY + 'movimientos/movEntradaXfecha' : 
             URL_PY + 'movimientos/movSalidaXfecha'
         ).load();
-    }
-}
-
-function mostrarMovimiento(id, tipo) {
-    if (tipo === 'entrada') {
-        mostrarMovEntradaX(id);
-    } else {
-        mostrarMovSalidaX(id);
     }
 }
 
@@ -264,8 +256,8 @@ function registrarMovEntrada() {
                     title: 'REGISTRO DE MOVIMIENTOS',
                     text: response,
                 }).then(function () {
-                    obtenerMovimientos();
                     limpiar();
+                    actualizarTabla();
                 });
             } else {
                 Swal.fire({
@@ -299,8 +291,8 @@ function registrarMovSalida() {
                     title: 'REGISTRO DE MOVIMIENTOS',
                     text: response
                 }).then(function () {
-                    obtenerMovimientoSalida();
                     limpiar2();
+                    actualizarTabla();
                 });
             } else {
                 Swal.fire({
@@ -446,7 +438,7 @@ function reporteExcelMovimientos() {
     document.body.removeChild(form);
 }
 
-function mostrarMovSalidaX(cod) {
+function mostrarMovimientosX(cod) {
     var parametros = 'cod=' + cod;
     const url = URL_PY + 'movimientos/editar_salida';
     // console.log(parametros);

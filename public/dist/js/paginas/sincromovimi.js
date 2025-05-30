@@ -9,7 +9,7 @@ $(document).ready(function () {
     });
 });
 
-function ver_movimientos_sincro() {
+function verSincronizacionMovimientos() {
     const fechaInicio = $('#datefechaini').val();
     const fechaFin = $('#datefechafin').val();
 
