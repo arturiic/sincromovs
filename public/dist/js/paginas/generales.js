@@ -226,29 +226,10 @@ function cambioEmpresa() {
   });
 }
 
-function abrirModalPerfil(cod) {
-  var parametros = 'cod=' + cod;
-  const url = URL_PY + 'personal/personalxcod';
-  //console.log(parametros);
-  $.ajax({
-    type: "GET",
-    url: url,
-    data: parametros,
-    success: function (response) {
-      //console.log(response);
-      $('#txtidp').val(cod);
-      $('#txtnombrep').val(response[0].nombre);
-      $('#txtfotop').val(response[0].fotito);
-      $('#txtcorreo').val(response[0].correo);
-    }
-  });
-  $('#mdlpersonal').modal('show');
-}
-
-function cambioUsuario() {
+function cambioUsuario(nombreUsuario) {
   Swal.fire({
     title: '¿Cerrar sesión?',
-    text: "Estás a punto de salir de la sesión actual",
+    html: `Estás a punto de salir de la sesión de <b>${nombreUsuario || 'Usuario'}</b>`,
     icon: 'question',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',

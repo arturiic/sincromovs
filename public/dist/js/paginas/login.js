@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#txtpassword').keyup(function (e) {
         if (e.keyCode == 13) {
-            loguear_sistema();
+            loguearSistema();
         }
     });
 });

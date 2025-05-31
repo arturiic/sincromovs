@@ -4,7 +4,7 @@ $this->extend('dashboard/template.php'); ?>
 <title>Movimientos | Registrar</title>
 <?= $this->endsection() ?>
 <?= $this->section('titulo_pagina'); ?>
-<h3 class="mb-0">Movimientos</h3>
+<h3 class="mb-0">MOVIMIENTOS</h3>
 <?= $this->endsection() ?>
 <?= $this->section('contenido_template'); ?>
 <div class="app-content">
@@ -30,7 +30,7 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards mb-md-3">
                                     <div class="col-md-10 col-12 mb-3 mb-md-0 order-md-1 order-2">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
+                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; CUENTA</label>
                                             <select class="form-select form-select-sm" id="cmbdetentempresa" name="cmbdetentempresa">
                                                 <?php foreach ($cuentas as $cuentasreg): ?>
                                                     <option value="<?= esc($cuentasreg['iddet_entidad_empresa']); ?>">
@@ -42,14 +42,14 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0 order-md-2 order-1">
                                         <button class="btn btn-success btn-sm w-100" id="btnsaldo" name="btnsaldo" onclick="abrirModalSaldo()">
-                                            <i class="fa-solid fa-money-bills"></i>&nbsp; Ingresar Saldo
+                                            <i class="fa-solid fa-money-bills"></i>&nbsp; INGRESAR SALDO
                                         </button>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
+                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; DESTINATARIO</label>
                                             <input type="hidden" id="txtiddest" name="txtiddest">
                                             <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario" name="txtdestinatario" placeholder="Destinatario" disabled>
@@ -63,13 +63,13 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-lg-8 col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
+                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; OBSERVACIÓN</label>
                                             <textarea class="form-control form-control-sm" rows="1" id="txtobservacion" name="txtobservacion"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
+                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; FECHA</label>
                                             <input type="date" class="form-control form-control-sm" id="datefecha" name="datefecha" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
@@ -77,19 +77,19 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
+                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
                                             <input type="text" class="form-control form-control-sm" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
+                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°OPERACIÓN</label>
                                             <input type="text" class="form-control form-control-sm" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-primary btn-sm w-100" onclick="registrarMovEntrada()">
-                                            <i class="fa-solid fa-floppy-disk"></i>&nbsp; Registrar
+                                            <i class="fa-solid fa-floppy-disk"></i>&nbsp; REGISTRAR
                                         </button>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ $this->extend('dashboard/template.php'); ?>
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" id="txtidmovsalida" name="txtidmovsalida">
-                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; Cuenta</label>
+                                            <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; CUENTA</label>
                                             <select class="form-select form-select-sm" id="cmbdetentempresa2" name="cmbdetentempresa2">
                                                 <?php foreach ($cuentas as $cuentasreg): ?>
                                                     <option value="<?= esc($cuentasreg['iddet_entidad_empresa']); ?>">
@@ -114,7 +114,7 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; Destinatario</label>
+                                            <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; DESTINATARIO</label>
                                             <input type="hidden" id="txtiddest2" name="txtiddest2">
                                             <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario2" name="txtdestinatario2" placeholder="Destinatarios" disabled>
@@ -128,13 +128,13 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-lg-8 col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; Observación</label>
+                                            <label class="form-label"><i class="fa-solid fa-comment"></i>&nbsp; OBSERVACIÓN</label>
                                             <textarea class="form-control form-control-sm" rows="1" id="txtobservacion2" name="txtobservacion2"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-12 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; Fecha</label>
+                                            <label class="form-label"><i class="fa-solid fa-calendar-days"></i>&nbsp; FECHA</label>
                                             <input type="date" class="form-control form-control-sm" id="datefecha2" name="datefecha2" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
@@ -142,20 +142,20 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="row row-cards">
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class=" form-group">
-                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; Monto</label>
+                                            <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
                                             <input type="text" class="form-control form-control-sm" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
-                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°operación</label>
+                                            <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°OPERACIÓN</label>
                                             <input type="text" class="form-control form-control-sm" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-primary btn-sm w-100" onclick="registrarMovSalida()" id="btnregistrar2" name="btnregistrar2">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            &nbsp;Registrar
+                                            &nbsp;REGISTRAR
                                         </button>
                                     </div>
                                 </div>
@@ -166,19 +166,19 @@ $this->extend('dashboard/template.php'); ?>
                         <div class="col-sm-12 mt-md-4">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h3 class="card-title mb-0"><i class="fas fa-list"></i> &nbsp;Registro de Movimientos</h3>
+                                    <h3 class="card-title mb-0"><i class="fas fa-list"></i> &nbsp;REGISTRO DE MOVIMIENTOS</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="tblmovimientos" name="tblmovimientos" class="table table-bordered table-hover dataTable dtr-inline">
                                             <thead>
                                                 <tr>
-                                                    <th class="bg-dark text-white">Destinatario</th>
-                                                    <th class="bg-dark text-white">Observación</th>
-                                                    <th class="bg-dark text-white">Fecha</th>
-                                                    <th class="bg-dark text-white">Monto</th>
-                                                    <th class="bg-dark text-white">N°Operación</th>
-                                                    <th class="bg-dark text-white">Acción</th>
+                                                    <th class="bg-dark text-white">DESTINATARIO</th>
+                                                    <th class="bg-dark text-white">OBSERVACIÓN</th>
+                                                    <th class="bg-dark text-white">FECHA</th>
+                                                    <th class="bg-dark text-white">MONTO</th>
+                                                    <th class="bg-dark text-white">N°OPERACIÓN</th>
+                                                    <th class="bg-dark text-white">ACCIÓN</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -188,7 +188,7 @@ $this->extend('dashboard/template.php'); ?>
                                 <div class="card-footer">
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-warning btn-sm w-100" onclick="abrirModalPDF()">
-                                            <i class="fa-solid fa-file-import"></i>&nbsp;Generar Reporte
+                                            <i class="fa-solid fa-file-import"></i>&nbsp;GENERAR REPORTE
                                         </button>
                                     </div>
 
@@ -205,7 +205,7 @@ $this->extend('dashboard/template.php'); ?>
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Elegir Destinatario</h5>
+                    <h5 id="lbltitulo" name="lbltitulo" class="modal-title">ELEGIR DESTINATARIO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -241,24 +241,24 @@ $this->extend('dashboard/template.php'); ?>
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-6">
-                            <label class="form-label">Fecha de inicio:</label>
+                            <label class="form-label">FECHA DE INICIO:</label>
                             <input type="date" class="form-control form-control-sm" id="dtpfechaini" name="dtpfechaini" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Fecha de fin:</label>
+                            <label class="form-label">FECHA DE FIN:</label>
                             <input type="date" class="form-control form-control-sm" id="dtpfechafin" name="dtpfechafin" value="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d'); ?>" />
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="bi bi-x-lg"></i>&nbsp;Cerrar
+                            <i class="bi bi-x-lg"></i>&nbsp;CERRAR
                         </button>
                         <div class="d-flex ms-auto">
                             <button class="btn btn-outline-danger btn-5" id="btngenerar" name="btngenerar" onclick="reportePDFmovimientos()">
                                 <i class="fa-solid fa-file-pdf"></i>&nbsp;PDF
                             </button>
                             <button class="btn btn-outline-success btn-5 ms-2" id="btnexcel" name="btnexcel" onclick="reporteExcelMovimientos()">
-                                <i class="fa-solid fa-file-excel"></i>&nbsp;Excel
+                                <i class="fa-solid fa-file-excel"></i>&nbsp;EXCEL
                             </button>
                         </div>
                     </div>
@@ -278,7 +278,7 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="row">
                         <div class="col-12 mb-3">
                             <div class="form-group">
-                                <label class="form-label">Observacion</label>
+                                <label class="form-label">OBSERVACIÓN</label>
                                 <input type="text" class="form-control form-control-sm" id="txtobservacionS" name="txtobservacionS" placeholder="Descripcion">
                             </div>
                         </div>
@@ -286,21 +286,21 @@ $this->extend('dashboard/template.php'); ?>
                     <div class="row">
                         <div class="col-lg-6 col-12 mb-3">
                             <div class="form-group">
-                                <label class="form-label">Saldo</label>
+                                <label class="form-label">SALDO</label>
                                 <input type="text" class="form-control form-control-sm" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12 mb-3">
                             <div class="form-group">
-                                <label class="form-label">N°Operación</label>
+                                <label class="form-label">N°OPERACIÓN</label>
                                 <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;CERRAR</button>
                         <button class="btn btn-success btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="registrarMovSaldo()">
-                            <i class="fa-solid fa-money-bills"></i>&nbsp; Registrar
+                            <i class="fa-solid fa-money-bills"></i>&nbsp; REGISTRAR
                         </button>
                     </div>
                 </div>
@@ -318,31 +318,31 @@ $this->extend('dashboard/template.php'); ?>
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-6">
-                            <label class="form-label">N° de Operación:</label>
+                            <label class="form-label">N°OPERACIÓN</label>
                             <input type="text" class="form-control form-control-sm" id="txtidoperacion" name="txtidoperacion" disabled>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Monto:</label>
+                            <label class="form-label">MONTO:</label>
                             <input type="text" class="form-control form-control-sm" id="txtmontomotivo" name="txtmontomotivo" disabled>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="col-12">
-                            <label class="form-label">Enviado a:</label>
+                            <label class="form-label">ENVIADO A:</label>
                             <input type="text" class="form-control form-control-sm" id="txtenviadoa" name="txtenviadoa" disabled>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="col-12">
-                            <label class="form-label">Motivo:</label>
+                            <label class="form-label">MOTIVO:</label>
                             <input type="text" class="form-control form-control-sm" id="txtmotivo" name="txtmotivo" placeholder="Motivo">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;CERRAR</button>
                         <button class="btn btn-primary btn-5 ms-auto" onclick="editar()" id="btneditar" name="btneditar">
                             <i class="fa-solid fa-square-plus"></i>
-                            &nbsp;Guardar
+                            &nbsp;GUARDAR
                         </button>
                     </div>
                 </div>
@@ -352,5 +352,5 @@ $this->extend('dashboard/template.php'); ?>
     <?= $this->endsection() ?>
 
     <?= $this->section('scripts') ?>
-    <script src="<?= base_url('public/dist/js/paginas/movimientos.js') ?>"></script>
+    <script src="<?= base_url('public/dist/js/paginas/movimientos.js?v='. getenv('VERSION')) ?>"></script>
     <?= $this->endsection() ?>

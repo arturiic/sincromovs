@@ -328,44 +328,20 @@ function limpiarSaldo() {
 }
 
 function reportePDFmovimientos() {
-    // Obtener fechas
     const fechaInicio = $('#dtpfechaini').val();
     const fechaFin = $('#dtpfechafin').val();
 
-    // Validar que fecha inicio no sea mayor a fecha fin
     if (fechaInicio > fechaFin) {
         Swal.fire({
             icon: 'warning',
-            title: 'ERROR EN LA BUSQUEDA',
+            title: 'ERROR EN LA BÚSQUEDA',
             text: 'La fecha de inicio no puede ser mayor a la fecha de fin',
         });
         return;
     }
-    // Crear un formulario temporal
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = URL_PY + 'movimientos/reporte_movimientos',
-        form.target = '_blank';
 
-    // Crear campos de formulario para los datos
-    const inputInicio = document.createElement('input');
-    inputInicio.type = 'hidden';
-    inputInicio.name = 'i';
-    inputInicio.value = $('#dtpfechaini').val();
-    form.appendChild(inputInicio);
-
-    const inputFin = document.createElement('input');
-    inputFin.type = 'hidden';
-    inputFin.name = 'f';
-    inputFin.value = $('#dtpfechafin').val();
-    form.appendChild(inputFin);
-
-    // Agregar el formulario al documento y enviarlo
-    document.body.appendChild(form);
-    form.submit();
-
-    // Eliminar el formulario después de enviarlo
-    document.body.removeChild(form);
+    const url = `${URL_PY}movimientos/reporte_movimientos.pdf?i=${fechaInicio}&f=${fechaFin}`;
+    window.open(url, '_blank');
 }
 
 function registrarMovSaldo() {
@@ -403,11 +379,9 @@ function registrarMovSaldo() {
 }
 
 function reporteExcelMovimientos() {
-    // Obtener fechas
     const fechaInicio = $('#dtpfechaini').val();
     const fechaFin = $('#dtpfechafin').val();
 
-    // Validar que fecha inicio no sea mayor a fecha fin
     if (fechaInicio > fechaFin) {
         Swal.fire({
             icon: 'warning',
@@ -416,26 +390,10 @@ function reporteExcelMovimientos() {
         });
         return;
     }
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = URL_PY + 'movimientos/reporte_excel_movimientos';
-    form.target = '_blank';
 
-    const inputInicio = document.createElement('input');
-    inputInicio.type = 'hidden';
-    inputInicio.name = 'i';
-    inputInicio.value = $('#dtpfechaini').val();
-    form.appendChild(inputInicio);
+    const url = `${URL_PY}movimientos/reporte_excel_movimientos?i=${fechaInicio}&f=${fechaFin}`;
 
-    const inputFin = document.createElement('input');
-    inputFin.type = 'hidden';
-    inputFin.name = 'f';
-    inputFin.value = $('#dtpfechafin').val();
-    form.appendChild(inputFin);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    window.location.href = url;
 }
 
 function mostrarMovimientosX(cod) {

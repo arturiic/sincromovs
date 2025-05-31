@@ -75,7 +75,8 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <button type="button" class="btn btn-block btn-primary btn-flat" onclick="abrirModalEmpresa()"><i class="fa-solid fa-building-user"></i></button>&nbsp;
-          <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario()"><i class="fa-solid fa-right-from-bracket"></i></button>
+          <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario('<?= session('nombreusuariocorto') ?>')">
+          <i class="fa-solid fa-right-from-bracket"></i></button>
           <!--end::Fullscreen Toggle-->
           <!--begin::User Menu Dropdown-->
           <li class=" nav-item user-menu">
@@ -152,27 +153,27 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 id="lbltitulo" name="lbltitulo" class="modal-title">Cambio de Empresa</h5>
+          <h5 id="lbltitulo" name="lbltitulo" class="modal-title">SELECCIONA LA EMPRESA</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="control-label form-label"><i class="fa fa-building"></i>&nbsp;Empresa</label>
+            <label class="control-label form-label"><i class="fa fa-building"></i>&nbsp;EMPRESA</label>
             <select id="cmbempresas" name="cmbempresas" class="form-select form-select-sm"></select>
           </div>
           <div class="mb-3">
-            <label class="control-label form-label"><i class="fa fa-industry"></i>&nbsp;Sucursal</label>
+            <label class="control-label form-label"><i class="fa fa-industry"></i>&nbsp;SUCURSAL</label>
             <select id="cmbsucursal" name="cmbsucursal" class="form-select form-select-sm"></select>
           </div>
           <div class="mb-3">
-            <label class="control-label form-label"><i class="fa fa-warehouse"></i>&nbsp;Almacén</label>
+            <label class="control-label form-label"><i class="fa fa-warehouse"></i>&nbsp;ALMACÉN</label>
             <select id="cmbalmacen" name="cmbalmacen" class="form-select form-select-sm"></select>
           </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
-          <button type="button" class="btn btn-primary" id="btnguardar" name="btnguardar" onclick="cambioEmpresa()">
-            <i class="fas fa-exchange-alt"></i>&nbsp;Cambiar</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp; CERRAR</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnguardar" name="btnguardar" onclick="cambioEmpresa()">
+            <i class="fas fa-exchange-alt"></i>&nbsp; CAMBIAR</button>
         </div>
       </div>
     </div>
@@ -213,7 +214,7 @@
   <script src="<?= base_url('public/dist/libs/sweetalert2/dist/sweetalert2.js') ?>"></script>
   <!-- AdminLTE y JS personalizados -->
   <script src="<?= base_url('public/dist/js/adminlte.js') ?>"></script>
-  <script src="<?= base_url('public/dist/js/paginas/generales.js') ?>"></script>
+  <script src="<?= base_url('public/dist/js/paginas/generales.js?v='. getenv('VERSION')) ?>"></script>
   <!-- Scripts específicos de la vista -->
   <?= $this->renderSection('scripts'); ?>
   <!---------------------------------------    SCRIPTS   ---------------------------------------------------->

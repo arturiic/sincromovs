@@ -77,6 +77,24 @@
         text-align: center;
         margin-bottom: 1.5rem;
     }
+    .material-login-logo {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .material-login-logo img {
+        max-width: 100%;
+        height: auto;
+        /* Asegura que la imagen no sea más ancha que el contenedor */
+        width: 50px; /* Ajusta este valor según sea necesario */
+    }
+    .btn-login-custom {
+    width: 90%;
+    max-width: 300px; /* Cambia este valor para el ancho máximo */
+    height: 40px;     /* Cambia este valor para el alto */
+    margin: 0 auto;
+    display: block;
+    font-size: 1.15rem; /* Opcional: tamaño de letra */
+    }
     .material-form-group {
         position: relative;
         margin-bottom: 1.5rem;
@@ -109,7 +127,7 @@
         position: absolute;
         top: 12px;
         left: 12px;
-        color: #1976d2;
+        color:rgb(0, 0, 0);
     }
     .material-form-group input,
     .material-form-group select {
@@ -135,16 +153,19 @@
         margin-top: 1.5rem;
     }
     .material-btn {
-        flex: 1;
-        border: none;
-        border-radius: 8px;
-        padding: 0.7rem 0;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.2s;
-        text-decoration: none;
-    }
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    text-align: center; /* Asegura centrado horizontal */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+}
     .material-btn-primary {
         background: #1976d2;
         color: #fff;
@@ -182,10 +203,12 @@
 <body class="login-page bg-body-secondary">
     <div class="fade-in-material">
         <div class="material-login-card">
-            <div class="material-login-title">
-                Grupo <b>ASIU</b>
+            <div class="material-login-logo">
+                <a href="https://grupoasiu.com/" title="Ir a grupoasiu.com">
+                    <img src="<?= base_url('public/dist/assets/img/logoaisu.webp') ?>" alt="Logo ASIU"
+                         style="width: 260px; height: 60px; object-fit: contain;" />
+                </a>
             </div>
-            <!-- Elimina el form para evitar submit por GET y respeta el JS -->
             <div id="loginForm" autocomplete="off">
                 <div class="material-form-group">
                     <span class="material-icons">person</span>
@@ -219,9 +242,12 @@
                         </a>
                     </span>
                 </div>
-                <div class="material-login-actions">
-                    <button type="button" onclick="loguearSistema()" class="material-btn material-btn-primary">INGRESAR</button>
-                    <a href="https://grupoasiu.com/" class="material-btn material-btn-danger" style="text-align:center;line-height:2.2;">SALIR</a>
+                <div class="material-login-actions" style="justify-content: center;">
+                    <button type="button"
+                            onclick="loguearSistema()"
+                            class="material-btn material-btn-primary btn-login-custom">
+                        INGRESAR
+                    </button>
                 </div>
             </div>
         </div>
@@ -271,7 +297,7 @@
     <script src="<?= base_url('public/dist/libs/toastr/build/toastr.min.js') ?>"></script>
     <script src="<?= base_url('public/dist/libs/sweetalert2/dist/sweetalert2.js') ?>"></script>
     <script src="<?= base_url('public/dist/js/adminlte.js') ?>"></script>
-	<script src="<?= base_url('public/dist/js/paginas/login.js') ?>" defer></script>
+	<script src="<?= base_url('public/dist/js/paginas/login.js?v='. getenv('VERSION')) ?>"></script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
     <script>

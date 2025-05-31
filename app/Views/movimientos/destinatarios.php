@@ -4,7 +4,7 @@ $this->extend('dashboard/template.php'); ?>
 <title>Movimientos | Destinatarios</title>
 <?= $this->endsection() ?>
 <?= $this->section('titulo_pagina'); ?>
-<h3 class="mb-0">Destinatarios</h3>
+<h3 class="mb-0">DESTINATARIOS</h3>
 <?= $this->endsection() ?>
 <?= $this->section('contenido_template'); ?>
 <div class="app-content">
@@ -17,9 +17,9 @@ $this->extend('dashboard/template.php'); ?>
                         <thead>
                             <tr>
                                 <th class="bg-dark text-white">Cod</th>
-                                <th class="bg-dark text-white">Nombre</th>
-                                <th class="bg-dark text-white">Estado</th>
-                                <th class="bg-dark text-white">Acción</th>
+                                <th class="bg-dark text-white">NOMBRE</th>
+                                <th class="bg-dark text-white">ESTADO</th>
+                                <th class="bg-dark text-white">ACCIÓN</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -28,7 +28,7 @@ $this->extend('dashboard/template.php'); ?>
             </div>
             <div class="card-footer">
                 <button onclick="abrirModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>
-                    &nbsp;Agregar Nuevo Destinatario</button>
+                    &nbsp;AGREGAR NUEVO DESTINATARIO</button>
             </div>
         </div>
     </div>
@@ -47,12 +47,12 @@ $this->extend('dashboard/template.php'); ?>
                     <input type="hidden" id="txtid" name="txtid">
                 <div class="col-lg-9">
                     <div class="form-group mb-3">
-                        <label class="form-label">Nombre Completo</label>
+                        <label class="form-label">NOMBRE COMPLETO</label>
                         <input type="text" class="form-control form-control-sm" id="txtnombre" name="txtnombre" placeholder="Nombre">
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <label class="form-label">Estado</label>
+                    <label class="form-label">ESTADO</label>
                     <select class="form-select form-select-sm" id="cmbestado" name="cmbestado">
                         <option value="ACTIVO">ACTIVO</option>
                         <option value="INACTIVO">INACTIVO</option>
@@ -61,11 +61,11 @@ $this->extend('dashboard/template.php'); ?>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnregistrar" name="btnregistrar" onclick="registrar()">
-                    <i class="fa-solid fa-plus"></i>&nbsp;Registrar</button>
-                <button type="button" class="btn btn-warning" id="btneditar" name="btneditar" onclick="editar()">
-                    <i class="fas fa-pencil"></i>&nbsp;Editar</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;CERRAR</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnregistrar" name="btnregistrar" onclick="registrar()">
+                    <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR</button>
+                <button type="button" class="btn btn-warning btn-sm" id="btneditar" name="btneditar" onclick="editar()">
+                    <i class="fas fa-pencil"></i>&nbsp;EDITAR</button>
             </div>
         </div>
     </div>
@@ -73,5 +73,5 @@ $this->extend('dashboard/template.php'); ?>
 <?= $this->endsection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('public/dist/js/paginas/destinatarios.js') ?>"></script>
+<script src="<?= base_url('public/dist/js/paginas/destinatarios.js?v='. getenv('VERSION')) ?>"></script>
 <?= $this->endsection() ?>

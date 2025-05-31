@@ -175,8 +175,8 @@ class MovimientosController extends Controller
         require_once(APPPATH . 'Libraries/fpdf/fpdf.php');
 
         // Obtener los parámetros
-        $inicio = $this->request->getPost('i');
-        $fin = $this->request->getPost('f');
+        $inicio = $this->request->getVar('i');
+		$fin = $this->request->getVar('f');
         $nombreusuario = session()->get('nombreusuariocorto');
         $nombrempresa = session()->get('nempresa');
         $codempresa = session()->get('codempresa');
@@ -442,8 +442,8 @@ class MovimientosController extends Controller
 
     public function reporteExcelMovimientos()
     {
-        $inicio = $this->request->getPost('i');
-        $fin = $this->request->getPost('f');
+        $inicio = $this->request->getGet('i');
+        $fin = $this->request->getGet('f');
         $codempresa = session()->get('codempresa');
         $nombreusuario = session()->get('nombreusuariocorto');
         $nombrempresa = session()->get('nempresa');

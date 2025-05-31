@@ -4,7 +4,7 @@ $this->extend('dashboard/template.php'); ?>
 <title>Movimientos | Cuentas</title>
 <?= $this->endsection() ?>
 <?= $this->section('titulo_pagina'); ?>
-<h3 class="mb-0">Cuentas</h3>
+<h3 class="mb-0">CUENTAS</h3>
 <?= $this->endsection() ?>
 <?= $this->section('contenido_template'); ?>
 <div class="app-content">
@@ -17,11 +17,11 @@ $this->extend('dashboard/template.php'); ?>
                         <thead>
                             <tr>
                                 <th class="bg-dark text-white">Cod</th>
-                                <th class="bg-dark text-white">Descripción</th>
-                                <th class="bg-dark text-white">Estado</th>
-                                <th class="bg-dark text-white">Entidad Bancaria</th>
-                                <th class="bg-dark text-white">Empresa</th>
-                                <th class="bg-dark text-white">Acción</th>
+                                <th class="bg-dark text-white">DESCRIPCIÓN</th>
+                                <th class="bg-dark text-white">ESTADO</th>
+                                <th class="bg-dark text-white">ENTIDAD BANCARIA</th>
+                                <th class="bg-dark text-white">EMPRESA</th>
+                                <th class="bg-dark text-white">ACCIÓN</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -30,7 +30,7 @@ $this->extend('dashboard/template.php'); ?>
             </div>
             <div class="card-footer">
                 <button onclick="abrirModal()" class="btn btn-primary"><i class="fa-solid fa-plus"></i>
-                    &nbsp;Agregar Nueva Cuenta</button>
+                    &nbsp;AGREGAR NUEVA CUENTA</button>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ $this->extend('dashboard/template.php'); ?>
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="form-group">
-                            <label class="form-label">Descripción</label>
+                            <label class="form-label">DESCRIPCIÓN</label>
                             <input type="text" class="form-control form-control-sm" id="txtdescripcion" name="txtdescripcion" placeholder="Descripción">
                         </div>
                     </div>
@@ -57,7 +57,7 @@ $this->extend('dashboard/template.php'); ?>
                 <div class="row">
                     <div class="col-lg-6 col-12 mb-3">
                         <div class="form-group">
-                            <label class="form-label">Estado</label>
+                            <label class="form-label">ESTADO</label>
                             <select class="form-select form-select-sm" id="cmbestado" name="cmbestado">
                                 <option value="ACTIVO">ACTIVO</option>
                                 <option value="INACTIVO">INACTIVO</option>
@@ -66,7 +66,7 @@ $this->extend('dashboard/template.php'); ?>
                     </div>
                     <div class="col-lg-6 col-12 mb-3">
                         <div class="form-group">
-                            <label class="form-label">Entidad Bancaria</label>
+                            <label class="form-label">ENTIDAD BANCARIA</label>
                             <select class="form-select form-select-sm" id="cmbent_bancaria" name="cmbent_bancaria">
                                 <option value="1">BCP</option>
                             </select>
@@ -77,9 +77,9 @@ $this->extend('dashboard/template.php'); ?>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnregistrar" name="btnregistrar" onclick="registrar()">
-                    <i class="fas fa-plus"></i>&nbsp; Registrar</button>
+                    <i class="fas fa-plus"></i>&nbsp; REGISTRAR</button>
                 <button type="button" class="btn btn-warning" id="btneditar" name="btneditar" onclick="editar()">
-                    <i class="fas fa-pencil"></i>&nbsp; Editar</button>
+                    <i class="fas fa-pencil"></i>&nbsp; EDITAR</button>
             </div>
         </div>
     </div>
@@ -87,5 +87,5 @@ $this->extend('dashboard/template.php'); ?>
 <?= $this->endsection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('public/dist/js/paginas/det_entidad_empresa.js') ?>"></script>
+<script src="<?= base_url('public/dist/js/paginas/det_entidad_empresa.js?v='. getenv('VERSION')) ?>"></script>
 <?= $this->endsection() ?>
