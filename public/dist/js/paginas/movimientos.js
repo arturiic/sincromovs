@@ -89,7 +89,7 @@ function inicializarTabla() {
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger mx-1" 
-                            onclick="eliminarMovimiento(${data}, '${currentTab}')"
+                            onclick="eliminarMovimiento(${data}, '${row.noperacion}', '${currentTab}')"
                             title="Eliminar">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -124,16 +124,16 @@ function actualizarTabla() {
     }
 }
 
-function eliminarMovimiento(idmov_finanzas) {
+function eliminarMovimiento(idmov_finanzas, noperacion) {
     Swal.fire({
-        title: "¿Estás seguro de eliminar este movimiento?",
+        title: `¿Estás seguro de eliminar el movimiento N° ${noperacion}?`,
         text: "Esta acción no se puede deshacer.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar"
+        confirmButtonText: "SÍ, ELIMINAR",
+        cancelButtonText: "CANCELAR"
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -172,12 +172,12 @@ function elegirDestinatario() {
 }
 
 function abrirModalPDF() {
-    $('#lbltitulos').html('Generar reporte');
+    $('#lbltitulos').html('GENERAR REPORTE');
     $('#mdlpdf').modal('show');
 }
 
 function abrirModalSaldo() {
-    $('#lbltitulo3').html('Ingresar Saldo');
+    $('#lbltitulo3').html('INGRESAR NUEVO SALDO');
     $('#mdlingsaldo').modal('show');
     limpiarSaldo();
 }
@@ -413,7 +413,7 @@ function mostrarMovimientosX(cod) {
             $('#txtmontomotivo').val(response[0].monto)
         }
     });
-    $('#lbltitulo4').html('Agregar Motivo');
+    $('#lbltitulo4').html('AGREGAR MOTIVO');
     var myModal = new bootstrap.Modal(document.getElementById('mdlmotivo'));
     myModal.show();
 }

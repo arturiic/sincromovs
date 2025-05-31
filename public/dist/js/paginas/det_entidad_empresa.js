@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function abrirModal() {
     limpiar();
-    $('#lbltitulo').html('Nueva Entidad Empresa');
+    $('#lbltitulo').html('NUEVA CUENTA EMPRESA');
     $('#btnregistrar').removeClass('d-none');
     $('#btneditar').addClass('d-none');
     $('#mdldet_entidad_empresa').modal('show');
@@ -127,7 +127,7 @@ function mostrarDatosx(cod) {
             $('#cmbent_bancaria').val(response[0].identidad_bancaria);  
         }
     });
-    $('#lbltitulo').html('Editar Entidad Empresa');
+    $('#lbltitulo').html('EDITAR CUENTA EMPRESA');
     $('#mdldet_entidad_empresa').modal('show');
 }
 

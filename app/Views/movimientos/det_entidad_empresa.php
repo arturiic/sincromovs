@@ -29,8 +29,10 @@ $this->extend('dashboard/template.php'); ?>
                 </div>
             </div>
             <div class="card-footer">
-                <button onclick="abrirModal()" class="btn btn-primary"><i class="fa-solid fa-plus"></i>
+                <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0">
+                <button onclick="abrirModal()" class="btn btn-primary btn-sm w-100"><i class="fa-solid fa-plus"></i>
                     &nbsp;AGREGAR NUEVA CUENTA</button>
+                </div>
             </div>
         </div>
     </div>

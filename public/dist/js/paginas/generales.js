@@ -234,8 +234,8 @@ function cambioUsuario(nombreUsuario) {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, salir',
-    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'SÍ, SALIR',
+    cancelButtonText: 'CANCELAR',
     allowOutsideClick: false
   }).then((result) => {
     if (result.isConfirmed) {

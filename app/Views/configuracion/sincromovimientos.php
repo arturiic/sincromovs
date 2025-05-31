@@ -41,7 +41,7 @@ $this->extend('dashboard/template.php'); ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="tbl_sincromovi" name="tbl_sincromovi" class="table table-bordered table-hover dataTable dtr-inline"> 
+                    <table id="tbl_sincromovi" name="tbl_sincromovi" class="table table-bordered table-hover dataTable dtr-inline">
                         <thead>
                             <tr>
                                 <th class="bg-dark text-white">TITULO</th>
@@ -57,8 +57,10 @@ $this->extend('dashboard/template.php'); ?>
                 </div>
             </div>
             <div class="card-footer">
-                <button onclick="insertarMovimientos()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>
-                    &nbsp;REGISTRAR MOVIMIENTOS</button>
+                <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0">
+                    <button onclick="insertarMovimientos()" class="btn btn-primary btn-sm w-100"><i class="fa-solid fa-plus"></i>
+                        &nbsp;REGISTRAR MOVIMIENTOS</button>
+                </div>
             </div>
         </div>
     </div>
@@ -68,5 +70,5 @@ $this->extend('dashboard/template.php'); ?>
 <?= $this->endsection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('public/dist/js/paginas/sincromovimi.js?v='. getenv('VERSION')) ?>"></script>
+<script src="<?= base_url('public/dist/js/paginas/sincromovimi.js?v=' . getenv('VERSION')) ?>"></script>
 <?= $this->endsection() ?>

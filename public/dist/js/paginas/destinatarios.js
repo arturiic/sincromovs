@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function abrirModal() {
     limpiar();
-    $('#lbltitulo').html('Nuevo Destinatario');
+    $('#lbltitulo').html('NUEVO DESTINATARIO');
     $('#btnregistrar').removeClass('d-none');
     $('#btneditar').addClass('d-none');
     var myModal = new bootstrap.Modal(document.getElementById('mdldestinatario'));
@@ -120,7 +120,7 @@ function mostrarDatosx(cod) {
             $('#cmbestado').val(response[0].estado);
         }
     });
-    $('#lbltitulo').html('Editar Destinatario');
+    $('#lbltitulo').html('EDITAR DESTINATARIO');
     var myModal = new bootstrap.Modal(document.getElementById('mdldestinatario'));
     myModal.show();
 }
