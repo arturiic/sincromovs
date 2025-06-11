@@ -29,7 +29,7 @@ class Database extends Config
         'hostname'     => 'localhost',
         'username'     => 'root',
         'password'     => '123',
-        'database'     => 'ollaavjq_chinalmacen',
+        'database'     => 'ollaavjq_chinalmacenFOX',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
