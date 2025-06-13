@@ -52,11 +52,15 @@ $this->extend('dashboard/template.php'); ?>
                                             <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; DESTINATARIO</label>
                                             <input type="hidden" id="txtiddest" name="txtiddest">
                                             <div class="input-group input-group-sm">
-                                                <input type="text" class="form-control" id="txtdestinatario" name="txtdestinatario" placeholder="Destinatario" disabled>
-                                                <button class="btn btn-outline-primary btn-sm" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" class="form-control" id="txtdestinatario" name="txtdestinatario" placeholder="Escribe al menos 3 digitos...">
+                                                <button class="btn btn-outline-primary btn-sm" id="btnregistrardesti" name="btnregistrardesti" onclick="registrarDestinatario()" type="button">
+                                                    <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
                                                 </button>
                                             </div>
+                                            <ul id="resultados_destinatario" class="list-group"></ul>
+                                            <button id="cargarMas_destinatario" class="btn btn-secondary btn-sm mt-2 w-100" style="display: none;">
+                                                <i class="fas fa-sync-alt"></i> CARGAR MÁS REGISTROS
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -78,13 +82,13 @@ $this->extend('dashboard/template.php'); ?>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
                                             <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <input type="text" class="form-control form-control-sm" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
                                             <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°OPERACIÓN</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
@@ -117,11 +121,15 @@ $this->extend('dashboard/template.php'); ?>
                                             <label class="form-label"><i class="fa-solid fa-users"></i>&nbsp; DESTINATARIO</label>
                                             <input type="hidden" id="txtiddest2" name="txtiddest2">
                                             <div class="input-group input-group-sm">
-                                                <input type="text" class="form-control" id="txtdestinatario2" name="txtdestinatario2" placeholder="Destinatarios" disabled>
-                                                <button class="btn btn-outline-primary btn-sm" id="btneledestinatario" name="btneledestinatario" onclick="elegirDestinatario()" type="button">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" class="form-control" id="txtdestinatario2" name="txtdestinatario2" placeholder="Escribe al menos 3 digitos...">
+                                                <button class="btn btn-outline-primary btn-sm" id="btnregistrardesti2" name="btnregistrardesti2" onclick="registrarDestinatario()" type="button">
+                                                    <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
                                                 </button>
                                             </div>
+                                            <ul id="resultados_destinatario2" class="list-group"></ul>
+                                            <button id="cargarMas_destinatario2" class="btn btn-secondary btn-sm mt-2 w-100" style="display: none;">
+                                                <i class="fas fa-sync-alt"></i> CARGAR MÁS REGISTROS
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -143,13 +151,13 @@ $this->extend('dashboard/template.php'); ?>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class=" form-group">
                                             <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <input type="text" class="form-control form-control-sm" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
                                             <label class="form-label"><i class="fa-solid fa-hashtag"></i>&nbsp; N°OPERACIÓN</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <input type="text" class="form-control form-control-sm" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
@@ -194,36 +202,6 @@ $this->extend('dashboard/template.php'); ?>
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!---------------------------------------------------MODAL DESTINATARIOS------------------------------------------------>
-    <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdleledestinatario" name="mdleledestinatario">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 id="lbltitulo" name="lbltitulo" class="modal-title">ELEGIR DESTINATARIO</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Buscador -->
-                            <div class="input-group mb-3">
-                                <input type="text" id="buscador" class="form-control" placeholder="Escribe al menos 1 letra..." autocomplete="off">
-                                <button class="btn btn-outline-primary" type="button" disabled>
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                            <!-- Resultados -->
-                            <ul id="resultados" class="list-group"></ul>
-                            <!-- Botón "Cargar más" -->
-                            <button id="cargarMas" class="btn btn-secondary btn-sm mt-2 w-100" style="display: none;">
-                                <i class="fas fa-sync-alt"></i> Cargar más
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -287,13 +265,13 @@ $this->extend('dashboard/template.php'); ?>
                         <div class="col-lg-6 col-12 mb-3">
                             <div class="form-group">
                                 <label class="form-label">SALDO</label>
-                                <input type="text" class="form-control form-control-sm" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                <input type="text" class="form-control form-control-sm" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12 mb-3">
                             <div class="form-group">
                                 <label class="form-label">N°OPERACIÓN</label>
-                                <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12">
                             </div>
                         </div>
                     </div>
@@ -352,5 +330,5 @@ $this->extend('dashboard/template.php'); ?>
     <?= $this->endsection() ?>
 
     <?= $this->section('scripts') ?>
-    <script src="<?= base_url('public/dist/js/paginas/movimientos.js?v='. getenv('VERSION')) ?>"></script>
+    <script src="<?= base_url('public/dist/js/paginas/movimientos.js?v=' . getenv('VERSION')) ?>"></script>
     <?= $this->endsection() ?>

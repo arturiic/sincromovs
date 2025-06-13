@@ -24,7 +24,7 @@ class DestinatariosController extends Controller
 
         // Validar que el nombre no sea nulo o vacío
         if (empty($nombre)) {
-            return $this->response->setJSON(['error' => 'El nombre del destinatario es obligatorio.']);
+            return $this->response->setJSON(['error' => 'Ingresa el nombre del destinatario.']);
         }
 
         if ($model->exists($nombre)) {
@@ -83,7 +83,7 @@ class DestinatariosController extends Controller
     {
         $termino = $this->request->getGet('q');
         $pagina = $this->request->getGet('page') ?? 1; // Página actual
-        $limite = 10; // Resultados por página
+        $limite = 5; // Resultados por página
         $offset = ($pagina - 1) * $limite; // Calcular desplazamiento
 
         if (strlen($termino) >= 1) {

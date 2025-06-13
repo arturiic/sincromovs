@@ -132,7 +132,7 @@
     <!--begin::Footer-->
     <footer class="app-footer">
       <!--begin::To the end-->
-      <div class="float-end d-none d-sm-inline">SincroMovimientos v.1.0</div>
+    <div class="float-end d-none d-sm-inline">SincroMovimientos v.<?= getenv('VERSION') ?></div>
       <!--end::To the end-->
       <!--begin::Copyright-->
       <strong>

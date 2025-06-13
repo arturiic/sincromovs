@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <!--begin::Head-->
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>SincroMovimientos</title>
@@ -49,153 +50,183 @@
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!-- Agrega Material Icons y estilos para animación Material -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-    .fade-in-material {
-        opacity: 0;
-        transform: translateY(40px) scale(0.98);
-        animation: fadeInMaterial 0.7s cubic-bezier(.4,0,.2,1) forwards;
-    }
-    @keyframes fadeInMaterial {
-        to {
-            opacity: 1;
-            transform: none;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .fade-in-material {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            animation: fadeInMaterial 0.7s cubic-bezier(.4, 0, .2, 1) forwards;
         }
-    }
-    .material-login-card {
-        border-radius: 18px;
-        box-shadow: 0 8px 24px rgba(60,60,60,0.12);
-        padding: 2.5rem 2rem 2rem 2rem;
-        background: #fff;
-        max-width: 370px;
-        margin: 48px auto;
-    }
-    .material-login-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color:rgb(0, 0, 0);
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-    .material-login-logo {
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-    .material-login-logo img {
-        max-width: 100%;
-        height: auto;
-        /* Asegura que la imagen no sea más ancha que el contenedor */
-        width: 50px; /* Ajusta este valor según sea necesario */
-    }
-    .btn-login-custom {
-    width: 90%;
-    max-width: 300px; /* Cambia este valor para el ancho máximo */
-    height: 40px;     /* Cambia este valor para el alto */
-    margin: 0 auto;
-    display: block;
-    font-size: 1.15rem; /* Opcional: tamaño de letra */
-    }
-    .material-form-group {
-        position: relative;
-        margin-bottom: 1.5rem;
-        /* Aumenta el ancho de los campos */
-        max-width: 380px; /* antes 340px */
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .material-form-group label {
-        position: absolute;
-        top: 12px;
-        left: 44px;
-        color: #888;
-        font-size: 1rem;
-        pointer-events: none;
-        transition: 0.2s;
-    }
-    .material-form-group input:focus + label,
-    .material-form-group input:not(:placeholder-shown) + label,
-    .material-form-group select:focus + label,
-    .material-form-group select:not([value=""]) + label {
-        top: -10px;
-        left: 40px;
-        font-size: 0.85rem;
-        color: #1976d2;
-        background: #fff;
-        padding: 0 4px;
-    }
-    .material-form-group .material-icons {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        color:rgb(0, 0, 0);
-    }
-    .material-form-group input,
-    .material-form-group select {
-        width: 99%; /* antes 96% */
-        padding: 12px 12px 12px 40px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        outline: none;
-        font-size: 1rem;
-        background: #f9f9f9;
-        transition: border-color 0.2s;
-        min-width: 260px; /* antes 240px */
-        box-sizing: border-box;
-    }
-    .material-form-group input:focus,
-    .material-form-group select:focus {
-        border-color: #1976d2;
-        background: #fff;
-    }
-    .material-login-actions {
-        display: flex;
-        gap: 12px;
-        margin-top: 1.5rem;
-    }
-    .material-btn {
-    border: none;
-    border-radius: 8px;
-    padding: 0.7rem 0;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-decoration: none;
-    text-align: center; /* Asegura centrado horizontal */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-}
-    .material-btn-primary {
-        background: #1976d2;
-        color: #fff;
-    }
-    .material-btn-primary:hover {
-        background: #125ea7;
-    }
-    .material-btn-danger {
-        background: #e53935;
-        color: #fff;
-        /* Quita subrayado en enlaces */
-        text-decoration: none !important;
-    }
-    .material-btn-danger:hover {
-        background: #b71c1c;
-        text-decoration: none !important;
-    }
-    @media (max-width: 480px) {
+
+        @keyframes fadeInMaterial {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
         .material-login-card {
-            padding: 1.5rem 0.5rem 1.5rem 0.5rem;
-            max-width: 88vw;
-            width: 108vw;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(60, 60, 60, 0.12);
+            padding: 2.5rem 2rem 2rem 2rem;
+            background: #fff;
+            max-width: 370px;
+            margin: 48px auto;
         }
+
+        .material-login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .material-login-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .material-login-logo img {
+            max-width: 100%;
+            height: auto;
+            /* Asegura que la imagen no sea más ancha que el contenedor */
+            width: 50px;
+            /* Ajusta este valor según sea necesario */
+        }
+
+        .btn-login-custom {
+            width: 90%;
+            max-width: 300px;
+            /* Cambia este valor para el ancho máximo */
+            height: 40px;
+            /* Cambia este valor para el alto */
+            margin: 0 auto;
+            display: block;
+            font-size: 1.15rem;
+            /* Opcional: tamaño de letra */
+        }
+
+        .material-form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            /* Aumenta el ancho de los campos */
+            max-width: 380px;
+            /* antes 340px */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .material-form-group label {
+            position: absolute;
+            top: 12px;
+            left: 44px;
+            color: #888;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+
+        .material-form-group input:focus+label,
+        .material-form-group input:not(:placeholder-shown)+label,
+        .material-form-group select:focus+label,
+        .material-form-group select:not([value=""])+label {
+            top: -10px;
+            left: 40px;
+            font-size: 0.85rem;
+            color: #1976d2;
+            background: #fff;
+            padding: 0 4px;
+        }
+
+        .material-form-group .material-icons {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            color: rgb(0, 0, 0);
+        }
+
         .material-form-group input,
         .material-form-group select {
-            min-width: 0;
-            width: 100%;
+            width: 99%;
+            /* antes 96% */
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            background: #f9f9f9;
+            transition: border-color 0.2s;
+            min-width: 260px;
+            /* antes 240px */
+            box-sizing: border-box;
         }
-    }
-</style>
+
+        .material-form-group input:focus,
+        .material-form-group select:focus {
+            border-color: #1976d2;
+            background: #fff;
+        }
+
+        .material-login-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .material-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            text-align: center;
+            /* Asegura centrado horizontal */
+            display: flex;
+            align-items: center;
+            /* Centrado vertical */
+            justify-content: center;
+            /* Centrado horizontal */
+        }
+
+        .material-btn-primary {
+            background: #1976d2;
+            color: #fff;
+        }
+
+        .material-btn-primary:hover {
+            background: #125ea7;
+        }
+
+        .material-btn-danger {
+            background: #e53935;
+            color: #fff;
+            /* Quita subrayado en enlaces */
+            text-decoration: none !important;
+        }
+
+        .material-btn-danger:hover {
+            background: #b71c1c;
+            text-decoration: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .material-login-card {
+                padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+                max-width: 88vw;
+                width: 108vw;
+            }
+
+            .material-form-group input,
+            .material-form-group select {
+                min-width: 0;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -206,7 +237,7 @@
             <div class="material-login-logo">
                 <a href="https://grupoasiu.com/" title="Ir a grupoasiu.com">
                     <img src="<?= base_url('public/dist/assets/img/logoaisu.webp') ?>" alt="Logo ASIU"
-                         style="width: 260px; height: 60px; object-fit: contain;" />
+                        style="width: 260px; height: 60px; object-fit: contain;" />
                 </a>
             </div>
             <div id="loginForm" autocomplete="off">
@@ -242,10 +273,15 @@
                         </a>
                     </span>
                 </div>
+                <!-- Recordar contraseña -->
+                <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.5rem; margin-top: -1rem;">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" style="margin-right: 8px;">
+                    <label for="rememberMe" style="margin: 0; font-size: 1rem; color: #1976d2; cursor: pointer;">Recordar contraseña</label>
+                </div>
                 <div class="material-login-actions" style="justify-content: center;">
                     <button type="button"
-                            onclick="loguearSistema()"
-                            class="material-btn material-btn-primary btn-login-custom">
+                        onclick="loguearSistema()"
+                        class="material-btn material-btn-primary btn-login-custom">
                         INGRESAR
                     </button>
                 </div>
@@ -291,35 +327,36 @@
         });
     </script>
     <script>
-		const URL_PY = "<?= base_url(); ?>";
-	</script>
+        const URL_PY = "<?= base_url(); ?>";
+    </script>
     <script src="<?= base_url('public/dist/libs/jquery/jquery-3.7.1.min.js') ?>"></script>
     <script src="<?= base_url('public/dist/libs/toastr/build/toastr.min.js') ?>"></script>
     <script src="<?= base_url('public/dist/libs/sweetalert2/dist/sweetalert2.js') ?>"></script>
     <script src="<?= base_url('public/dist/js/adminlte.js') ?>"></script>
-	<script src="<?= base_url('public/dist/js/paginas/login.js?v='. getenv('VERSION')) ?>"></script>
+    <script src="<?= base_url('public/dist/js/paginas/login.js?v=' . getenv('VERSION')) ?>"></script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const passwordInput = document.getElementById('txtpassword');
-    const toggle = document.querySelector('.toggle-password');
-    const eyeOpen = toggle.querySelector('#eye-open');
-    const eyeClosed = toggle.querySelector('#eye-closed');
-    toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            eyeOpen.style.display = 'none';
-            eyeClosed.style.display = '';
-        } else {
-            passwordInput.type = 'password';
-            eyeOpen.style.display = '';
-            eyeClosed.style.display = 'none';
-        }
-    });
-});
-</script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('txtpassword');
+            const toggle = document.querySelector('.toggle-password');
+            const eyeOpen = toggle.querySelector('#eye-open');
+            const eyeClosed = toggle.querySelector('#eye-closed');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeOpen.style.display = 'none';
+                    eyeClosed.style.display = '';
+                } else {
+                    passwordInput.type = 'password';
+                    eyeOpen.style.display = '';
+                    eyeClosed.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 <!--end::Body-->
+
 </html>

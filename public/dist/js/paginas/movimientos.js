@@ -1,19 +1,17 @@
-let terminoActual = "";
+let terminoActualEntrada = '';
+let paginaActualEntrada = 1;
+let terminoActualSalida = '';
+let paginaActualSalida = 1;
 let filaSeleccionada = null;
-let pagina = 1;
 let tableMovimientos = null;
 let currentTab = 'entrada';
 
 var table = "";
 
 $(document).ready(function () {
-    $("#buscador").keyup(function () {
-        terminoActual = $(this).val();
-        pagina = 1; // Reiniciar la paginación
-        buscarDestinatarios(true);
-    });
+
     // 1. Evento para limpiar campos al cambiar de pestaña
-    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
         const target = $(e.target).attr('href');
         if (target === '#tabentrada') {
             currentTab = 'entrada';
@@ -22,17 +20,86 @@ $(document).ready(function () {
         }
         actualizarTabla();
     });
-
-    $("#cargarMas").click(function () {
-        pagina++; // Aumentar la página
-        buscarDestinatarios(false);
+    $('#txtnoperacion, #txtnoperacion2, #txtnoperacionS').on('keypress', function (e) {
+        const char = String.fromCharCode(e.which);
+        // Bloquea solo letras, permite cualquier otro símbolo
+        if (/[a-zA-Z]/.test(char)) {
+            e.preventDefault();
+        }
     });
+    $('#txtmonto, #txtmonto2, #txtsaldo').on('keypress', function (e) {
+        const char = String.fromCharCode(e.which);
+        // Permite solo números, puntos y comas
+        if (!/[0-9.,]/.test(char)) {
+            e.preventDefault();
+        }
+    });
+    $('#txtdestinatario').on('keyup', function () {
+        let termino = $(this).val();
+        terminoActualEntrada = termino;
+        paginaActualEntrada = 1;
+        if (termino.length >= 3) {
+            buscarDestinatariosInline(termino, 1, 'entrada', false);
+        } else {
+            $('#resultados_destinatario').html('');
+            $('#cargarMas_destinatario').hide();
+            if (termino.length === 0) {
+                $('#txtiddest').val('');
+            }
+        }
+    });
+
+    $('#cargarMas_destinatario').on('click', function () {
+        paginaActualEntrada++;
+        buscarDestinatariosInline(terminoActualEntrada, paginaActualEntrada, 'entrada', true);
+    });
+
+    $('#txtdestinatario2').on('keyup', function () {
+        let termino = $(this).val();
+        terminoActualSalida = termino;
+        paginaActualSalida = 1;
+        if (termino.length >= 3) {
+            buscarDestinatariosInline(termino, 1, 'salida', false);
+        } else {
+            $('#resultados_destinatario2').html('');
+            $('#cargarMas_destinatario2').hide();
+            if (termino.length === 0) {
+                $('#txtiddest2').val('');
+            }
+        }
+    });
+
+    $('#cargarMas_destinatario2').on('click', function () {
+        paginaActualSalida++;
+        buscarDestinatariosInline(terminoActualSalida, paginaActualSalida, 'salida', true);
+    });
+
+    // Evento para seleccionar destinatario ENTRADA
+    $(document).on('click', '.escogerDestinatarioInline', function () {
+        let iddestinatario = $(this).data('id');
+        let nombreDestinatario = $(this).data('nombre');
+        $('#txtiddest').val(iddestinatario);
+        $('#txtdestinatario').val(nombreDestinatario);
+        $('#resultados_destinatario').html('');
+        $('#cargarMas_destinatario').hide();
+    });
+
+    // Evento para seleccionar destinatario SALIDA
+    $(document).on('click', '.escogerDestinatarioInline2', function () {
+        let iddestinatario = $(this).data('id');
+        let nombreDestinatario = $(this).data('nombre');
+        $('#txtiddest2').val(iddestinatario);
+        $('#txtdestinatario2').val(nombreDestinatario);
+        $('#resultados_destinatario2').html('');
+        $('#cargarMas_destinatario2').hide();
+    });
+
     // Eventos para filtros
-    $("#datefecha, #cmbdetentempresa").change(function() {
+    $("#datefecha, #cmbdetentempresa").change(function () {
         if (currentTab === 'entrada') actualizarTabla();
     });
 
-    $("#datefecha2, #cmbdetentempresa2").change(function() {
+    $("#datefecha2, #cmbdetentempresa2").change(function () {
         if (currentTab === 'salida') actualizarTabla();
     });
     inicializarTabla();
@@ -49,38 +116,42 @@ function inicializarTabla() {
         "ajax": {
             "url": URL_PY + 'movimientos/movEntradaXfecha',
             "type": "GET",
-            "data": function() {
+            "data": function () {
                 return getCurrentParams();
             }
         },
         "columns": [
-            { "data": "destinatario",
+            {
+                "data": "destinatario",
                 "width": "30%",
-             },
-            { "data": "observacion",
+            },
+            {
+                "data": "observacion",
                 "width": "30%",
-             },
-            { "data": "fecha",
+            },
+            {
+                "data": "fecha",
                 "width": "10%",
-             },
-            { 
+            },
+            {
                 "data": "monto",
                 "width": "10%",
-                "render": function(data, type, row) {
-                    return currentTab === 'entrada' ? 
-                        `<span class="text-success">+${data}</span>` : 
+                "render": function (data, type, row) {
+                    return currentTab === 'entrada' ?
+                        `<span class="text-success">+${data}</span>` :
                         `<span class="text-danger">-${data}</span>`;
                 }
             },
-            { "data": "noperacion",
+            {
+                "data": "noperacion",
                 "width": "10%",
-             },
+            },
             {
                 "data": "idmov_finanzas",
                 "orderable": false,
                 "className": "text-center",
                 "width": "15%",
-                "render": function(data, type, row) {
+                "render": function (data, type, row) {
                     return `
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-warning mx-1" 
@@ -117,9 +188,9 @@ function getCurrentParams() {
 function actualizarTabla() {
     if (tableMovimientos) {
         tableMovimientos.ajax.url(
-            currentTab === 'entrada' ? 
-            URL_PY + 'movimientos/movEntradaXfecha' : 
-            URL_PY + 'movimientos/movSalidaXfecha'
+            currentTab === 'entrada' ?
+                URL_PY + 'movimientos/movEntradaXfecha' :
+                URL_PY + 'movimientos/movSalidaXfecha'
         ).load();
     }
 }
@@ -162,15 +233,6 @@ function eliminarMovimiento(idmov_finanzas, noperacion) {
     });
 }
 
-function elegirDestinatario() {
-    filaSeleccionada = $(this).closest("tr");
-    $('#buscador').val('');
-    $('#resultados').html('');
-    let totalPaginas = 0;
-    $("#cargarMas").toggle(pagina < totalPaginas);
-    $('#mdleledestinatario').modal('show');
-}
-
 function abrirModalPDF() {
     $('#lbltitulos').html('GENERAR REPORTE');
     $('#mdlpdf').modal('show');
@@ -182,60 +244,80 @@ function abrirModalSaldo() {
     limpiarSaldo();
 }
 
-function buscarDestinatarios(limpiar) {
-    if (terminoActual.length >= 1) {
-        $.ajax({
-            url: URL_PY + "destinatarios/busc_destinatarios",
-            method: "GET",
-            data: { q: terminoActual, page: pagina },
-            dataType: "json",
-            success: function (data) {
-                //console.log(data);
-
-                if (limpiar) $("#resultados").html(""); // Limpiar resultados si es una nueva búsqueda
-
+function buscarDestinatariosInline(termino, pagina, tipo, append = false) {
+    $.ajax({
+        url: URL_PY + "destinatarios/busc_destinatarios",
+        method: "GET",
+        data: { q: termino, page: pagina, limite: 5 },
+        dataType: "json",
+        success: function (data) {
+            let ulId = tipo === 'entrada' ? '#resultados_destinatario' : '#resultados_destinatario2';
+            let btnId = tipo === 'entrada' ? '#cargarMas_destinatario' : '#cargarMas_destinatario2';
+            if (!append) $(ulId).html('');
+            if (data.destinatarios && data.destinatarios.length > 0) {
                 $.each(data.destinatarios, function (index, destinatarios) {
-                    $("#resultados").append(`
+                    $(ulId).append(`
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span><strong>${destinatarios.nombre}</strong> <br> 
-                                
-                            </span>
-                            <button class="btn btn-6 btn-primary active btn-pill w-10 escogerDestinatario" 
-                                data-id="${destinatarios.iddestinatario}" 
+                            <span><strong>${destinatarios.nombre}</strong></span>
+                            <button class="btn btn-6 btn-primary active btn-pill w-10 ${tipo === 'entrada' ? 'escogerDestinatarioInline' : 'escogerDestinatarioInline2'}"
+                                data-id="${destinatarios.iddestinatario}"
                                 data-nombre="${destinatarios.nombre}">
                                 <i class="fas fa-check"></i>
                             </button>
                         </li>
                     `);
                 });
-
                 let totalPaginas = Math.ceil(data.total / data.limite);
-                $("#cargarMas").toggle(pagina < totalPaginas);
-            },
-            error: function () {
-                //console.error("Error en la búsqueda.");
+                if (pagina < totalPaginas) {
+                    $(btnId).show();
+                } else {
+                    $(btnId).hide();
+                }
+            } else if (!append) {
+                $(ulId).html('<li class="list-group-item text-center text-muted">EL DESTINATARIO INGRESADO NO EXISTE, REGÍSTRALO</li>');
+                $(btnId).hide();
             }
-        });
-    }
+        }
+    });
 }
 
-$(document).on("click", ".escogerDestinatario", function () {
-    let iddestinatario = $(this).data("id");
-    let nombreDestinatario = $(this).data("nombre");
-    $("#txtiddest").val(iddestinatario);
-    $("#txtdestinatario").val(nombreDestinatario);
-    $("#mdleledestinatario").modal('hide');
-});
-
-$(document).on("click", ".escogerDestinatario", function () {
-    let iddestinatario = $(this).data("id");
-    let nombreDestinatario = $(this).data("nombre");
-    $("#txtiddest2").val(iddestinatario);
-    $("#txtdestinatario2").val(nombreDestinatario);
-    $("#mdleledestinatario").modal('hide');
-});
-
 function registrarMovEntrada() {
+    var destinatario = $('#txtiddest').val();
+    var observacion = $('#txtobservacion').val();
+    var monto = $('#txtmonto').val();
+    var noperacion = $('#txtnoperacion').val();
+    if (!destinatario) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe seleccionar un destinatario.'
+        });
+        return;
+    }
+    if (!observacion) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar una observación.'
+        });
+        return;
+    }
+    if (!monto) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar un monto.'
+        });
+        return;
+    }
+    if (!noperacion) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar el número de operación.'
+        });
+        return;
+    }
     var parametros =
         'Destinatario=' + $('#txtiddest').val() +
         '&Cuenta=' + $('#cmbdetentempresa').val() +
@@ -271,6 +353,42 @@ function registrarMovEntrada() {
 }
 
 function registrarMovSalida() {
+    var destinatario = $('#txtiddest2').val();
+    var observacion = $('#txtobservacion2').val();
+    var monto = $('#txtmonto2').val();
+    var noperacion = $('#txtnoperacion2').val();
+    if (!destinatario) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe seleccionar un destinatario.'
+        });
+        return;
+    }
+    if (!observacion) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar una observación.'
+        });
+        return;
+    }
+    if (!monto) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar un monto.'
+        });
+        return;
+    }
+    if (!noperacion) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar el número de operación.'
+        });
+        return;
+    }
     var parametros =
         'Destinatario=' + $('#txtiddest2').val() +
         '&Cuenta=' + $('#cmbdetentempresa2').val() +
@@ -441,6 +559,52 @@ function editar() {
                 }).then(function () {
                     $('#mdlmotivo').modal('hide');
                     actualizarTabla();
+                });
+            }
+        }
+    });
+}
+function registrarDestinatario() {
+    var inputId = currentTab === 'entrada' ? '#txtdestinatario' : '#txtdestinatario2';
+    var inputIdHidden = currentTab === 'entrada' ? '#txtiddest' : '#txtiddest2';
+    var ulResultados = currentTab === 'entrada' ? '#resultados_destinatario' : '#resultados_destinatario2';
+    var btnCargarMas = currentTab === 'entrada' ? '#cargarMas_destinatario' : '#cargarMas_destinatario2';
+    var nombre = $(inputId).val();
+    var parametros = 'nombre=' + nombre + '&estado=ACTIVO';
+    $.ajax({
+        type: "POST",
+        url: URL_PY + 'destinatarios/registrar',
+        data: parametros,
+        success: function (response) {
+            if (response.error) {
+                Swal.fire({
+                    icon: "error",
+                    title: 'ERROR AL REGISTRAR',
+                    text: response.error
+                });
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: URL_PY + 'destinatarios/busc_destinatarios',
+                    data: { q: nombre, page: 1 },
+                    success: function (resp) {
+                        if (resp.destinatarios && resp.destinatarios.length > 0) {
+                            var encontrado = resp.destinatarios.find(function (d) { return d.nombre === nombre; });
+                            if (encontrado) {
+                                $(inputIdHidden).val(encontrado.iddestinatario);
+                                $(inputId).val(encontrado.nombre);
+                                $(ulResultados).html('');
+                                $(btnCargarMas).hide();
+                            }
+                        }
+                    },
+                    complete: function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'DESTINATARIO REGISTRADO',
+                            text: response.message,
+                        });
+                    }
                 });
             }
         }
