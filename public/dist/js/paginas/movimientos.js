@@ -283,7 +283,6 @@ function buscarDestinatariosInline(termino, pagina, tipo, append = false) {
 
 function registrarMovEntrada() {
     var destinatario = $('#txtiddest').val();
-    var observacion = $('#txtobservacion').val();
     var monto = $('#txtmonto').val();
     var noperacion = $('#txtnoperacion').val();
     if (!destinatario) {
@@ -291,14 +290,6 @@ function registrarMovEntrada() {
             icon: 'warning',
             title: 'ERROR AL REGISTRAR',
             text: 'Debe seleccionar un destinatario.'
-        });
-        return;
-    }
-    if (!observacion) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'ERROR AL REGISTRAR',
-            text: 'Debe ingresar una observación.'
         });
         return;
     }
@@ -354,7 +345,6 @@ function registrarMovEntrada() {
 
 function registrarMovSalida() {
     var destinatario = $('#txtiddest2').val();
-    var observacion = $('#txtobservacion2').val();
     var monto = $('#txtmonto2').val();
     var noperacion = $('#txtnoperacion2').val();
     if (!destinatario) {
@@ -362,14 +352,6 @@ function registrarMovSalida() {
             icon: 'warning',
             title: 'ERROR AL REGISTRAR',
             text: 'Debe seleccionar un destinatario.'
-        });
-        return;
-    }
-    if (!observacion) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'ERROR AL REGISTRAR',
-            text: 'Debe ingresar una observación.'
         });
         return;
     }
