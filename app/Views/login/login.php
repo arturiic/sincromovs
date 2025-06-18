@@ -6,10 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>SincroMovimientos</title>
     <!-- Favicon para icono pestaña -->
-    <link rel="icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480-150x150.png" sizes="32x32" />
-    <link rel="icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" />
-    <meta name="msapplication-TileImage" content="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" />
+    <link rel="icon" href="<?= base_url('public/dist/assets/img/favicon-32x32.png') ?>" sizes="32x32" />
+    <link rel="icon" href="<?= base_url('public/dist/assets/img/favicon-192x192.png') ?>" sizes="192x192" />
+    <link rel="apple-touch-icon" href="<?= base_url('public/dist/assets/img/apple-touch-icon.png') ?>" />
+    <meta name="msapplication-TileImage" content="<?= base_url('public/dist/assets/img/ms-tile-144x144.png') ?>" />
     <!--begin::CSS Required Plugin(AdminLTE)-->
     <link href="<?= base_url('public/dist/css/adminlte.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/dist/libs/fontawesome/css/fontawesome.css') ?>" rel="stylesheet">
@@ -275,7 +275,7 @@
                 </div>
                 <!-- Recordar contraseña -->
                 <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.5rem; margin-top: -1rem;">
-                    <input type="checkbox" id="rememberMe" name="rememberMe" style="margin-right: 8px;">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" style="margin-right: 8px; margin-left: 12px;">
                     <label for="rememberMe" style="margin: 0; font-size: 1rem; color: #1976d2; cursor: pointer;">Recordar contraseña</label>
                 </div>
                 <div class="material-login-actions" style="justify-content: center;">

@@ -116,6 +116,18 @@ class MovimientosController extends Controller
         ];
         try {
             $MovimientosModel = new MovimientosModel();
+            // Validar si ya existe la operación para esa cuenta
+            $existe = $MovimientosModel->where([
+                'noperacion' => $data['Noperacion'],
+                'iddet_entidad_empresa' => $data['Cuenta'],
+                'tipo' => $data['Tipo']
+            ])->countAllResults();
+
+            if ($existe > 0) {
+                return $this->response->setJSON([
+                    'error' => 'Este número de operación ya existe en la cuenta seleccionada.'
+                ]);
+            }
             //Generar XML
             $xml = new XMLWriter();
             $xml->openMemory();
@@ -133,10 +145,13 @@ class MovimientosController extends Controller
 
             // **Llamar al procedimiento almacenado**
             $resultado = $MovimientosModel->registrarMovimientos($xml->outputMemory());
-
-            echo $resultado;
+            return $this->response->setJSON([
+                'message' => $resultado // mensaje del SP
+            ]);
         } catch (\Exception $e) {
-            echo json_encode(['error' => 'Error: ' . $e->getMessage()]);
+            return $this->response->setJSON([
+                'error' => 'ERROR: ' . $e->getMessage()
+            ]);
         }
     }
 
@@ -176,7 +191,7 @@ class MovimientosController extends Controller
 
         // Obtener los parámetros
         $inicio = $this->request->getVar('i');
-		$fin = $this->request->getVar('f');
+        $fin = $this->request->getVar('f');
         $nombreusuario = session()->get('nombreusuariocorto');
         $nombrempresa = session()->get('nempresa');
         $codempresa = session()->get('codempresa');
@@ -369,7 +384,7 @@ class MovimientosController extends Controller
         $total = $entra - $salid;
         $pdf->SetFillColor(200, 220, 255);
         $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(218, 4, '', 0, 0, 'R'); 
+        $pdf->Cell(218, 4, '', 0, 0, 'R');
         $pdf->Cell(19, 4, number_format($entra, 2), 1, 0, 'R');
         $pdf->Cell(19, 4, number_format($salid, 2), 1, 0, 'R');
         $pdf->Cell(19, 4, number_format($total, 2), 1, 1, 'R'); // Mostrar el total en la columna SALDO
@@ -397,6 +412,17 @@ class MovimientosController extends Controller
         ];
         try {
             $MovimientosModel = new MovimientosModel();
+            // Validar si ya existe la operación para esa cuenta
+            $existe = $MovimientosModel->where([
+                'noperacion' => $data['Noperacion'],
+                'iddet_entidad_empresa' => $data['Cuenta']
+            ])->countAllResults();
+
+            if ($existe > 0) {
+                return $this->response->setJSON([
+                    'error' => 'Este número de operación ya existe para la cuenta seleccionada.'
+                ]);
+            }
             //Generar XML
             $xml = new XMLWriter();
             $xml->openMemory();
@@ -413,10 +439,13 @@ class MovimientosController extends Controller
 
             // **Llamar al procedimiento almacenado**
             $resultado = $MovimientosModel->registrarSaldo($xml->outputMemory());
-
-            echo $resultado;
-        } catch (\Exception $e) {
-            echo json_encode(['error' => 'Error: ' . $e->getMessage()]);
+            return $this->response->setJSON([
+                'message' => $resultado // mensaje del SP
+            ]);
+        } catch (\Throwable $e) {
+            return $this->response->setJSON([
+                'error' => 'ERROR: ' . $e->getMessage()
+            ]);
         }
     }
     public function ver_movimientos_sincro()

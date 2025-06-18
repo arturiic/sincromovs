@@ -9,7 +9,6 @@ let currentTab = 'entrada';
 var table = "";
 
 $(document).ready(function () {
-
     // 1. Evento para limpiar campos al cambiar de pestaña
     $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
         const target = $(e.target).attr('href');
@@ -23,17 +22,11 @@ $(document).ready(function () {
     $('#txtnoperacion, #txtnoperacion2, #txtnoperacionS').on('keypress', function (e) {
         const char = String.fromCharCode(e.which);
         // Bloquea solo letras, permite cualquier otro símbolo
-        if (/[a-zA-Z]/.test(char)) {
+        if (/[a-zA-Z\s]/.test(char)) {
             e.preventDefault();
         }
     });
-    $('#txtmonto, #txtmonto2, #txtsaldo').on('keypress', function (e) {
-        const char = String.fromCharCode(e.which);
-        // Permite solo números, puntos y comas
-        if (!/[0-9.,]/.test(char)) {
-            e.preventDefault();
-        }
-    });
+   
     $('#txtdestinatario').on('keyup', function () {
         let termino = $(this).val();
         terminoActualEntrada = termino;
@@ -238,12 +231,6 @@ function abrirModalPDF() {
     $('#mdlpdf').modal('show');
 }
 
-function abrirModalSaldo() {
-    $('#lbltitulo3').html('INGRESAR NUEVO SALDO');
-    $('#mdlingsaldo').modal('show');
-    limpiarSaldo();
-}
-
 function buscarDestinatariosInline(termino, pagina, tipo, append = false) {
     $.ajax({
         url: URL_PY + "destinatarios/busc_destinatarios",
@@ -323,20 +310,26 @@ function registrarMovEntrada() {
         data: parametros,
         success: function (response) {
             //console.log(response);
-            if (response.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
+            if (response.message && response.message.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
                 Swal.fire({
                     icon: 'success',
                     title: 'REGISTRO DE MOVIMIENTOS',
-                    text: response,
+                    text: response.message,
                 }).then(function () {
                     limpiar();
                     actualizarTabla();
+                });
+            } else if (response && response.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR AL REGISTRAR',
+                    text: response.error
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'ERROR AL REGISTRAR',
-                    text: response
+                    text: 'Ocurrió un error inesperado.'
                 });
             }
         },
@@ -385,20 +378,26 @@ function registrarMovSalida() {
         data: parametros,
         success: function (response) {
             //console.log(response);
-            if (response.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
+            if (response.message && response.message.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
                 Swal.fire({
                     icon: 'success',
                     title: 'REGISTRO DE MOVIMIENTOS',
-                    text: response
+                    text: response.message,
                 }).then(function () {
                     limpiar2();
                     actualizarTabla();
+                });
+            } else if (response.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR AL REGISTRAR',
+                    text: response.error
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'ERROR AL REGISTRAR',
-                    text: response
+                    text: 'Ocurrió un error inesperado.'
                 });
             }
         },
@@ -421,12 +420,6 @@ function limpiar2() {
     $('#txtnoperacion2').val('');
 }
 
-function limpiarSaldo() {
-    $('#txtobservacionS').val('');
-    $('#txtsaldo').val('');
-    $('#txtnoperacionS').val('');
-}
-
 function reportePDFmovimientos() {
     const fechaInicio = $('#dtpfechaini').val();
     const fechaFin = $('#dtpfechafin').val();
@@ -443,13 +436,40 @@ function reportePDFmovimientos() {
     const url = `${URL_PY}movimientos/reporte_movimientos.pdf?i=${fechaInicio}&f=${fechaFin}`;
     window.open(url, '_blank');
 }
+//            SALDO
+function abrirModalSaldo() {
+    $('#lbltitulo3').html('INGRESAR NUEVO SALDO');
+    $('#txtnoperacionS').val(generarOperacionPorFecha());
+    $('#txtsaldo').val('');
+    $('#mdlingsaldo').modal('show');
+}
+
+function generarOperacionPorFecha() {
+    var now = new Date();
+    var dd = String(now.getDate()).padStart(2, '0');
+    var mm = String(now.getMonth() + 1).padStart(2, '0');
+    var yy = String(now.getFullYear()).slice(-2);
+    var hh = String(now.getHours()).padStart(2, '0');
+    var min = String(now.getMinutes()).padStart(2, '0');
+    var ss = String(now.getSeconds()).padStart(2, '0');
+    return dd + mm + yy + hh + min + ss;
+}
 
 function registrarMovSaldo() {
+    var saldo = $('#txtsaldo').val();
+    if (!saldo) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'ERROR AL REGISTRAR',
+            text: 'Debe ingresar el saldo'
+        });
+        return;
+    }
     var parametros =
         'Observacion=' + $('#txtobservacionS').val() +
         '&Cuenta=' + $('#cmbdetentempresa').val() +
         '&Fecha=' + $('#datefecha').val() +
-        '&Saldo=' + $('#txtsaldo').val() +
+        '&Saldo=' + saldo +
         '&Tipo=SALDO' +
         '&Noperacion=' + $('#txtnoperacionS').val();
     $.ajax({
@@ -457,21 +477,26 @@ function registrarMovSaldo() {
         url: URL_PY + 'movimientos/registrar_saldo',
         data: parametros,
         success: function (response) {
-            //console.log(response);
-            if (response.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
+            if (response.message && response.message.includes('MOVIMIENTO FINANCIERO REGISTRADO')) {
                 Swal.fire({
                     icon: 'success',
                     title: 'REGISTRO DE MOVIMIENTOS',
-                    text: response,
+                    text: response.message,
                 }).then(function () {
                     actualizarTabla();
                     $("#mdlingsaldo").modal('hide')
+                });
+            } else if (response.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR AL REGISTRAR',
+                    text: response.error
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'ERROR AL REGISTRAR',
-                    text: response
+                    text: 'Ocurrió un error inesperado.'
                 });
             }
         },

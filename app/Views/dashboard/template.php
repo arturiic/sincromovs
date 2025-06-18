@@ -17,10 +17,10 @@
     content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard" />
   <!-- end::Primary Meta Tags -->
   <!-- Favicon para icono pestaña -->
-  <link rel="icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480-150x150.png" sizes="32x32" />
-  <link rel="icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" />
-  <meta name="msapplication-TileImage" content="https://grupoasiu.com/wp-content/uploads/2020/08/favicon-e1707234995480.png" />
+  <link rel="icon" href="<?= base_url('public/dist/assets/img/favicon-32x32.png') ?>" sizes="32x32" />
+  <link rel="icon" href="<?= base_url('public/dist/assets/img/favicon-192x192.png') ?>" sizes="192x192" />
+  <link rel="apple-touch-icon" href="<?= base_url('public/dist/assets/img/apple-touch-icon.png') ?>" />
+  <meta name="msapplication-TileImage" content="<?= base_url('public/dist/assets/img/ms-tile-144x144.png') ?>" />
   <!---------------------------------------   CSS/ESTILOS  ---------------------------------------------------->
   <!-- Tipografía -->
   <link rel="stylesheet"
@@ -58,6 +58,7 @@
   <?= $this->renderSection('estilos'); ?>
   <!---------------------------------------   FIN CSS/ESTILOS  ---------------------------------------------------->
 </head>
+
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
   <!--begin::App Wrapper-->
   <div class="app-wrapper">
@@ -76,7 +77,7 @@
         <ul class="navbar-nav ms-auto">
           <button type="button" class="btn btn-block btn-primary btn-flat" onclick="abrirModalEmpresa()"><i class="fa-solid fa-building-user"></i></button>&nbsp;
           <button type="button" class="btn btn-block btn-dark btn-flat" onclick="cambioUsuario('<?= session('nombreusuariocorto') ?>')">
-          <i class="fa-solid fa-right-from-bracket"></i></button>
+            <i class="fa-solid fa-right-from-bracket"></i></button>
           <!--end::Fullscreen Toggle-->
           <!--begin::User Menu Dropdown-->
           <li class=" nav-item user-menu">
@@ -132,7 +133,7 @@
     <!--begin::Footer-->
     <footer class="app-footer">
       <!--begin::To the end-->
-    <div class="float-end d-none d-sm-inline">SincroMovimientos v.<?= getenv('VERSION') ?></div>
+      <div class="float-end d-none d-sm-inline">SincroMovimientos v.<?= getenv('VERSION') ?></div>
       <!--end::To the end-->
       <!--begin::Copyright-->
       <strong>
@@ -214,7 +215,7 @@
   <script src="<?= base_url('public/dist/libs/sweetalert2/dist/sweetalert2.js') ?>"></script>
   <!-- AdminLTE y JS personalizados -->
   <script src="<?= base_url('public/dist/js/adminlte.js') ?>"></script>
-  <script src="<?= base_url('public/dist/js/paginas/generales.js?v='. getenv('VERSION')) ?>"></script>
+  <script src="<?= base_url('public/dist/js/paginas/generales.js?v=' . getenv('VERSION')) ?>"></script>
   <!-- Scripts específicos de la vista -->
   <?= $this->renderSection('scripts'); ?>
   <!---------------------------------------    SCRIPTS   ---------------------------------------------------->

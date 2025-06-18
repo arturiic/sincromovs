@@ -243,3 +243,13 @@ function cambioUsuario(nombreUsuario) {
     }
   });
 }
+
+function validarNumero(input) {
+    // Eliminar caracteres no permitidos (dejar solo números y un punto decimal)
+    input.value = input.value.replace(/[^0-9.]/g, '');
+  
+    // Verificar si hay más de un punto decimal y eliminar los extras
+    if (input.value.split('.').length > 2) {
+      input.value = input.value.substring(0, input.value.lastIndexOf('.'));
+    }
+}

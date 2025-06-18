@@ -28,7 +28,7 @@ $this->extend('dashboard/template.php'); ?>
                             <!---------------------------------------------- TAB DE ENTRADA ------------------------------------------------>
                             <div class="tab-pane fade show active" id="tabentrada" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                                 <div class="row row-cards mb-md-3">
-                                    <div class="col-md-10 col-12 mb-3 mb-md-0 order-md-1 order-2">
+                                    <div class="col-md-9 col-12 mb-3 mb-md-0 order-md-1 order-2">
                                         <div class="form-group">
                                             <label class="form-label"><i class="fa-solid fa-money-check-dollar"></i>&nbsp; CUENTA</label>
                                             <select class="form-select form-select-sm" id="cmbdetentempresa" name="cmbdetentempresa">
@@ -40,7 +40,7 @@ $this->extend('dashboard/template.php'); ?>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0 order-md-2 order-1">
+                                    <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0 order-md-2 order-1">
                                         <button class="btn btn-success btn-sm w-100" id="btnsaldo" name="btnsaldo" onclick="abrirModalSaldo()">
                                             <i class="fa-solid fa-money-bills"></i>&nbsp; INGRESAR SALDO
                                         </button>
@@ -53,7 +53,12 @@ $this->extend('dashboard/template.php'); ?>
                                             <input type="hidden" id="txtiddest" name="txtiddest">
                                             <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario" name="txtdestinatario" placeholder="Escribe al menos 3 digitos...">
-                                                <button class="btn btn-outline-primary btn-sm" id="btnregistrardesti" name="btnregistrardesti" onclick="registrarDestinatario()" type="button">
+                                                <div class="d-none d-md-block" style="min-width: 200px;">
+                                                    <button class="btn btn-outline-primary btn-sm w-100" id="btnregistrardesti" name="btnregistrardesti" onclick="registrarDestinatario()" type="button">
+                                                        <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
+                                                    </button>
+                                                </div>
+                                                <button class="btn btn-outline-primary btn-sm d-md-none" id="btnregistrardesti" name="btnregistrardesti" onclick="registrarDestinatario()" type="button">
                                                     <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
                                                 </button>
                                             </div>
@@ -79,10 +84,10 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
+                                    <div class="col-md-4 col-12 mb-3 mb-md-0">
                                         <div class="form-group">
                                             <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8">
+                                            <input type="text" class="form-control form-control-sm" oninput="validarNumero(this)" id="txtmonto" name="txtmonto" placeholder="Monto" maxlength="8">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
@@ -91,9 +96,9 @@ $this->extend('dashboard/template.php'); ?>
                                             <input type="text" class="form-control form-control-sm" id="txtnoperacion" name="txtnoperacion" placeholder="Número de operación" maxlength="20">
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                    <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-primary btn-sm w-100" onclick="registrarMovEntrada()">
-                                            <i class="fa-solid fa-floppy-disk"></i>&nbsp; REGISTRAR
+                                            <i class="fa-solid fa-floppy-disk"></i>&nbsp; REGISTRAR MOVIMIENTO
                                         </button>
                                     </div>
                                 </div>
@@ -122,7 +127,12 @@ $this->extend('dashboard/template.php'); ?>
                                             <input type="hidden" id="txtiddest2" name="txtiddest2">
                                             <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" id="txtdestinatario2" name="txtdestinatario2" placeholder="Escribe al menos 3 digitos...">
-                                                <button class="btn btn-outline-primary btn-sm" id="btnregistrardesti2" name="btnregistrardesti2" onclick="registrarDestinatario()" type="button">
+                                                <div class="d-none d-md-block" style="min-width: 200px;">
+                                                    <button class="btn btn-outline-primary btn-sm w-100" id="btnregistrardesti2" name="btnregistrardesti2" onclick="registrarDestinatario()" type="button">
+                                                        <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
+                                                    </button>
+                                                </div>
+                                                <button class="btn btn-outline-primary btn-sm d-md-none" id="btnregistrardesti2" name="btnregistrardesti2" onclick="registrarDestinatario()" type="button">
                                                     <i class="fa-solid fa-plus"></i>&nbsp;REGISTRAR
                                                 </button>
                                             </div>
@@ -148,10 +158,10 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                 </div>
                                 <div class="row row-cards">
-                                    <div class="col-md-5 col-12 mb-3 mb-md-0">
+                                    <div class="col-md-4 col-12 mb-3 mb-md-0">
                                         <div class=" form-group">
                                             <label class="form-label"><i class="fa-solid fa-money-bill-wave"></i>&nbsp; MONTO</label>
-                                            <input type="text" class="form-control form-control-sm" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8">
+                                            <input type="text" class="form-control form-control-sm" oninput="validarNumero(this)" id="txtmonto2" name="txtmonto2" placeholder="Monto" maxlength="8">
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-12 mb-3 mb-md-0">
@@ -160,10 +170,10 @@ $this->extend('dashboard/template.php'); ?>
                                             <input type="text" class="form-control form-control-sm" id="txtnoperacion2" name="txtnoperacion2" placeholder="Número de operación" maxlength="20">
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                    <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-primary btn-sm w-100" onclick="registrarMovSalida()" id="btnregistrar2" name="btnregistrar2">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            &nbsp;REGISTRAR
+                                            &nbsp;REGISTRAR MOVIMIENTO
                                         </button>
                                     </div>
                                 </div>
@@ -194,7 +204,7 @@ $this->extend('dashboard/template.php'); ?>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="col-md-2 col-12 d-flex align-items-end mb-3 mb-md-0">
+                                    <div class="col-md-3 col-12 d-flex align-items-end mb-3 mb-md-0">
                                         <button class="btn btn-warning btn-sm w-100" onclick="abrirModalPDF()">
                                             <i class="fa-solid fa-file-import"></i>&nbsp;GENERAR REPORTE
                                         </button>
@@ -246,38 +256,31 @@ $this->extend('dashboard/template.php'); ?>
     </div>
     <!---------------------------------------------------------MODAL SALDO----------------------------------------------------------------->
     <div class="modal modal-blur fade" tabindex="-1" role="dialog" id="mdlingsaldo" name="mdlingsaldo">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 id="lbltitulo3" name="lbltitulo3" class="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="text" class="form-control form-control-sm" id="txtobservacionS" name="txtobservacionS" hidden>
                     <div class="row">
-                        <div class="col-12 mb-3">
-                            <div class="form-group">
-                                <label class="form-label">OBSERVACIÓN</label>
-                                <input type="text" class="form-control form-control-sm" id="txtobservacionS" name="txtobservacionS" placeholder="Descripcion">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-12 mb-3">
+                        <div class="col-lg-7 col-12 mb-4">
                             <div class="form-group">
                                 <label class="form-label">SALDO</label>
-                                <input type="text" class="form-control form-control-sm" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8">
+                                <input type="text" class="form-control form-control-sm" oninput="validarNumero(this)" id="txtsaldo" name="txtsaldo" placeholder="Saldo" maxlength="8">
                             </div>
                         </div>
-                        <div class="col-lg-6 col-12 mb-3">
+                        <div class="col-lg-5 col-12 mb-4">
                             <div class="form-group">
-                                <label class="form-label">N°OPERACIÓN</label>
-                                <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" placeholder="Número de Operación" maxlength="12">
+                                <label class="form-label">N°OPERACION</label>
+                                <input type="text" class="form-control form-control-sm" id="txtnoperacionS" name="txtnoperacionS" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;CERRAR</button>
-                        <button class="btn btn-success btn-5 ms-auto" id="btngenerar" name="btngenerar" onclick="registrarMovSaldo()">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>&nbsp;CERRAR</button>
+                        <button class="btn btn-success btn-5 btn-sm ms-auto" id="btngenerar" name="btngenerar" onclick="registrarMovSaldo()">
                             <i class="fa-solid fa-money-bills"></i>&nbsp; REGISTRAR
                         </button>
                     </div>
